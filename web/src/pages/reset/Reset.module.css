@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+  width: 450px;
+}
+
+.inputContent {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.inputContent label {
+  font-weight: 700;
+}
+
+.inputContent span {
+  color: red;
+}
+
+.inputPassword {
+  position: relative;
+}
+
+.iconEye {
+  position: absolute;
+
+  top: 38px;
+  right: 10px;
+}

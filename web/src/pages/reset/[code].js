@@ -45,7 +45,7 @@ export default function Reset() {
         alert('A senha deve ter no mínimo 6 caracteres')
         return
       }
-      await api.post(`/reset/${code}`, {
+      await api.post(`/users/reset/${code}`, {
         newPassword: form.newPassword.trim()
       })
 

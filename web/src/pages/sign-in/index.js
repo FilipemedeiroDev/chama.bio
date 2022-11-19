@@ -50,7 +50,7 @@ export default function SignIn() {
         return
       }
 
-      const response = await api.post('/login',{
+      const response = await api.post('/users/login',{
         email: form.email.trim(),
         password: form.password.trim()
       })

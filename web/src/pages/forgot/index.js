@@ -29,7 +29,7 @@ export default function Forgot() {
           return
         }
         
-        await api.post('/forgot', {
+        await api.post('/users/forgot', {
           email: form.email.trim()
         })
 
@@ -38,6 +38,7 @@ export default function Forgot() {
         router.push('/sign-in')
       } catch (error) {
         alert(error.response.data.message)
+        return
       }
   }
 

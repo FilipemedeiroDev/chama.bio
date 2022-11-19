@@ -12,7 +12,7 @@ const nodemailer = require('../nodemailerConfig')
 
 const UserModel = require('../Models/UserModel');
 const UserToken = require('../Models/UserToken');
-const { Router } = require('express');
+const UserProfile = require('../Models/UserProfile')
 
 class UsersController {
 
@@ -47,6 +47,10 @@ class UsersController {
           if(!userRegister) {
             return res.status(400).json({ message:  'Não foi possive cadastrar o usuário'})
           }
+          
+          await UserProfile.create({
+            user_id: userRegister._id
+          })
 
            return res.status(201).json({message: 'Usuário cadastrado com sucesso!'})
           } catch (error) {

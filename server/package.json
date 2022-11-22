@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^2.1.0",
     "aws-sdk": "^2.1250.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
@@ -19,6 +20,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.0",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.8.0",
     "yup": "^0.32.11",
     "yup-locales": "^1.2.10"

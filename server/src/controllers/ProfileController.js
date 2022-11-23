@@ -17,18 +17,18 @@ class ProfileController {
   async uploadAvatar(req, res) {
     const {id: userId, username} = req.user;
     const name = `${userId}_${username}`
-  
     try {
- 
+      
       const { data, error } = await supabase
-        .storage
-        .from(process.env.SUPABASE_BUCKET)
-        .upload(`${username}/${name}`, req.file.buffer, {
-          contentType: req.file.mimetype,
-          cacheControl: 3600,
-          upsert: true
-        })
-
+      .storage
+      .from(process.env.SUPABASE_BUCKET)
+      .upload(`${username}/${name}`, req.file.buffer, {
+        contentType: req.file.mimetype,
+        cacheControl: 3600,
+        upsert: true
+      })
+      
+      
       if (error) {
         return res.status(400).json(error.message)
       }
@@ -46,7 +46,7 @@ class ProfileController {
       avatarUrl: PublicUrl.publicUrl
     })
 
-    return res.status(200).json({message: 'Upload realizado com sucesso'})
+    return res.status(200).json({avatarUrl: PublicUrl.publicUrl})
     } catch (error) {
       return res.status(500).json({ message:  error.message});
     }

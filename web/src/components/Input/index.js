@@ -1,6 +1,6 @@
 import styles from './Input.module.css';
 
-export default function Input({ type, placeholder, name, value, handleChangeInput}) {
+export default function Input({ type, placeholder, name, value, handleChangeInput, style}) {
   return (
     <div>
       <input 
@@ -10,6 +10,8 @@ export default function Input({ type, placeholder, name, value, handleChangeInpu
         name={name}
         value={value}
         onChange={handleChangeInput}
+        style={style}
+      
       />
     </div>
   )

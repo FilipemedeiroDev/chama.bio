@@ -81,8 +81,7 @@ class ProfileController {
     const {description, background_color, background_button_color, text_color } = req.body;
 
     try {
-      await profileValidation.validate(req.body);
-
+      
       const userUpdated = await UserProfile.updateMany({ user_id: userId }, {
         description,
         background_color,

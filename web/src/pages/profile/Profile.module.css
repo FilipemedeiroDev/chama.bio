@@ -13,9 +13,30 @@
   justify-content: center;
 
   width: 450px;
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 2px 2px 6px 2px var(--gray);
 }
 
-.contentImage {
+.contentProfile {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.contentUpload {
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid var(--gray);
+  padding-bottom: 30px;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.avatar {
   border-radius: 50%;
   position: relative;
   overflow: hidden;
@@ -23,11 +44,11 @@
   height: 160px;
 }
 
-.contentInputFile {
+.inputFile {
   margin-top: 20px;
 }
 
-.contentInputFile label {
+.inputFile label {
   height: 50px;
   padding: 14px 24px;
   border: none;
@@ -40,7 +61,11 @@
   cursor: pointer;
 }
 
-.contentInputFile input[type="file"] {
+.inputFile label:hover {
+  opacity: 0.9;
+}
+
+.inputFile input[type="file"] {
   display: none;
 }
 
@@ -55,4 +80,33 @@
   color: white;
   font-weight: 700;
   font-size: 16px;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.contentForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.contentForm label {
+  font-size: 14px;
+}
+
+.contentForm span {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.inputColor {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 20px;
+}
+
+.inputColor label {
+  font-size: 14px;
 }

@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 
 
 export function setItem(key, value) {
-  Cookies.set(key, value,{expires: 1});
+  Cookies.set(key, value,{expires: 1, path: ''});
 }
 
 export function getItem(key) {

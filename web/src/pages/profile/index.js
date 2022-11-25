@@ -2,7 +2,8 @@ import styles from './Profile.module.css';
 import { useEffect, useState, useRef}  from 'react';
 
 import Image from 'next/image';
-import Button from '../../components/Button'
+import Button from '../../components/Button';
+import Header from '../../components/Header';
 
 import api from '../../services/api';
 
@@ -14,7 +15,7 @@ export default function Profile() {
   const [text, setText] = useState('');
   const [form, setForm] = useState({
     description: '',
-    background_color:'',
+    background_color: '',
     background_button_color: '',
     text_color: ''
   })
@@ -86,6 +87,9 @@ export default function Profile() {
 
   return (
       <div className={styles.container}>
+        <Header 
+          page='profile'
+        />
         <form>
           <div className={styles.content}>
             <div className={styles.contentProfile}>
@@ -94,10 +98,11 @@ export default function Profile() {
                   <Image 
                       src={!profile.avatarUrl ? BlankImageProfile : profile.avatarUrl}
                       fill
-                      objectFit='cover'
+                      sizes='(max-width: 1200px) 50vw,'
+                      quality={100}
                       style={{
                         borderRadius: '50%',
-                        border: '6px solid var(--green)',
+                        objectFit: 'cover',
                         
                       }}
                       alt='icon profile'
@@ -119,11 +124,8 @@ export default function Profile() {
                     />
                   </div>
                   <button 
-                    className={styles.button}
+                    className={styles.buttonUpload}
                     type='button'
-                    style={{
-                     padding: '12px 40px'
-                    }}
                     onClick={handleUpload}
                   >
                    Fazer upload
@@ -136,6 +138,7 @@ export default function Profile() {
                   type='text'
                   id='description'
                   name='description'
+                  value={form.description ? form.description : form.description = profile.description}
                   style={{
                     height: '60px',
                     padding: '12px',
@@ -152,7 +155,7 @@ export default function Profile() {
                     <label htmlFor='inputColor'>Cor de fundo</label>
                       <input 
                         type='color'
-                        value={form.background_color ? form.background_color : '#bdbbc7'}
+                        value={form.background_color ? form.background_color : form.background_color = profile.background_color}
                         id='inputColor'
                         name='background_color'
                         onChange={handleChangeInput}
@@ -166,7 +169,7 @@ export default function Profile() {
                     <label htmlFor='inputColor'>Cor do botão</label>
                     <input 
                       type='color'
-                      value={form.background_button_color ? form.background_button_color : '#bdbbc7'}
+                      value={form.background_button_color ? form.background_button_color : form.background_button_color = profile.background_button_color}
                       id='inputColor'
                       name='background_button_color'
                       onChange={handleChangeInput}
@@ -181,7 +184,7 @@ export default function Profile() {
                     <label htmlFor='inputColor'>Cor do texto</label>
                     <input 
                       type='color'
-                      value={form.text_color ? form.text_color : '#bdbbc7'}
+                      value={form.text_color ? form.text_color : form.text_color = profile.text_color}
                       id='inputColor'
                       name='text_color'
                       onChange={handleChangeInput}

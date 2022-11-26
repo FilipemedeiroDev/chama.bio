@@ -13,3 +13,41 @@
 
   margin-top: 100px;
 }
+
+.contentH2 {
+  width: 350px;
+  text-align: center;
+}
+
+.h2 {
+  margin-top: 60px;
+  border-top: 1px solid var(--gray);
+  padding-top: 10px;
+}
+
+.contentLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 6%;
+
+  position: relative;
+}
+
+.deleteIcon {
+  position: absolute;
+  top: 35px;
+  right: -12px;
+}
+
+@media screen and (max-width: 768px) {
+  .contentLink {
+    padding-right: 10%;
+    padding-left: 4%;
+  }
+
+  .deleteIcon {
+    top: 35px;
+    right: 5px;
+  }
+}

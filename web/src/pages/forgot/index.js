@@ -8,6 +8,8 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Logo from '../../components/Logo';
 
+import Link from 'next/link'
+
 
 export default function Forgot() {
   const [form, setForm] = useState({email: ''});
@@ -64,6 +66,9 @@ export default function Forgot() {
               text='Enviar email'
               handleSubmit={handleSubmit}
             />
+          <div className={styles.Link}>
+            <Link href={'/sign-in'}>Voltar para o Login</Link>
+          </div> 
         </div>
       </form>
     </div> 

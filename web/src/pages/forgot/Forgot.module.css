@@ -26,3 +26,14 @@
 .inputContent span {
   color: red;
 }
+
+.Link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 110% 68%;
+  }
+}

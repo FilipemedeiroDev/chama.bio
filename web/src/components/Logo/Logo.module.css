@@ -8,3 +8,9 @@
 .contentLogo span {
   color: var(--green);
 }
+
+@media screen and (max-width: 768px) {
+  .contentLogo {
+    top: 60px;
+  }
+}

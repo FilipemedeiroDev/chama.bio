@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const ProfileController = require('./controllers/ProfileController');
-const USersController = require('./controllers/USersController');
+const UsersController = require('./controllers/USersController');
+const LinkController = require('./controllers/LinkController');
 const authentication = require('./middlewares/auth');
 
 const multer = require('multer')
@@ -9,14 +10,18 @@ const upload = multer({ storage: storage })
 
 const routes = Router();
 
-routes.post('/users', USersController.Create)
-routes.post('/users/login', USersController.Login)
-routes.post('/users/forgot', USersController.Forgot)
-routes.post('/users/reset/:code', USersController.Reset)
+routes.post('/users', UsersController.Create)
+routes.post('/users/login', UsersController.Login)
+routes.post('/users/forgot', UsersController.Forgot)
+routes.post('/users/reset/:code', UsersController.Reset)
 
 routes.get('/profiles', authentication, ProfileController.getProfile);
 routes.post('/profiles/update', authentication, ProfileController.updateProfile);
 routes.patch('/profiles/avatar', authentication, upload.single('avatar'), ProfileController.uploadAvatar);
-routes.delete('/profiles/avatar', authentication, ProfileController.removeAvatar)
+routes.delete('/profiles/avatar', authentication, ProfileController.removeAvatar);
+
+routes.get('/links', authentication, LinkController.getUserLinks);
+routes.post('/links', authentication, LinkController.createLink);
+routes.delete('/links/:id', authentication, LinkController.deleteLink)
 
 module.exports = routes;

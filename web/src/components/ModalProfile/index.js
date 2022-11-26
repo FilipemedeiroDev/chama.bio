@@ -1,15 +1,16 @@
-import styles from './Profile.module.css';
+import styles from './ModalProfile.module.css';
 import { useEffect, useState, useRef}  from 'react';
 
 import Image from 'next/image';
-import Button from '../../components/Button';
-import Header from '../../components/Header';
+import Button from '../Button';
+
 
 import api from '../../services/api';
 
 import BlankImageProfile from '../../assets/blank-image-profile.png';
+import { FaTimes } from 'react-icons/fa';
 
-export default function Profile() {
+export default function ModalProfile({ clickFunction }) {
   const [profile, setProfile] = useState({})
   const [image, setImage] = useState('');
   const [text, setText] = useState('');
@@ -54,16 +55,17 @@ export default function Profile() {
   
     }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-
+    async function handleSubmit() {
+        
+       
         try {
           await api.post('/profiles/update', {
-            description: form.description,
+            description: form.description.trim(),
             background_color: form.background_color,
             background_button_color: form.background_button_color,
             text_color: form.text_color
           })
+
         } catch (error) {
           alert(error.response.data.message)
         return
@@ -87,11 +89,15 @@ export default function Profile() {
 
   return (
       <div className={styles.container}>
-        <Header 
-          page='profile'
-        />
         <form>
           <div className={styles.content}>
+            <div className={styles.closeModal}>
+              <FaTimes 
+                color='white'
+                fontSize={'30px'}
+                onClick={clickFunction}
+              />
+            </div>
             <div className={styles.contentProfile}>
               <div className={styles.contentUpload}>
                 <div className={styles.avatar}>
@@ -138,10 +144,10 @@ export default function Profile() {
                   type='text'
                   id='description'
                   name='description'
-                  value={form.description ? form.description : form.description = profile.description}
+                  value={form.description}
                   style={{
                     height: '60px',
-                    padding: '12px',
+                    padding: '8px',
                     borderRadius: '10px',
                     resize: 'none',
                   }}
@@ -155,7 +161,7 @@ export default function Profile() {
                     <label htmlFor='inputColor'>Cor de fundo</label>
                       <input 
                         type='color'
-                        value={form.background_color ? form.background_color : form.background_color = profile.background_color}
+                        value={form.background_color}
                         id='inputColor'
                         name='background_color'
                         onChange={handleChangeInput}
@@ -169,7 +175,7 @@ export default function Profile() {
                     <label htmlFor='inputColor'>Cor do botão</label>
                     <input 
                       type='color'
-                      value={form.background_button_color ? form.background_button_color : form.background_button_color = profile.background_button_color}
+                      value={form.background_button_color}
                       id='inputColor'
                       name='background_button_color'
                       onChange={handleChangeInput}
@@ -184,7 +190,7 @@ export default function Profile() {
                     <label htmlFor='inputColor'>Cor do texto</label>
                     <input 
                       type='color'
-                      value={form.text_color ? form.text_color : form.text_color = profile.text_color}
+                      value={form.text_color}
                       id='inputColor'
                       name='text_color'
                       onChange={handleChangeInput}
@@ -197,7 +203,10 @@ export default function Profile() {
                 </div>
                 <Button 
                   text='Salvar'
-                  handleSubmit={handleSubmit}
+                  clickFunction={handleSubmit}
+                  style={{
+                    height: '40px'
+                  }}
                 />
               </div>
            </div>

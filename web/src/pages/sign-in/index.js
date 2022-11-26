@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 
 import Input from '../../components/Input';
 import Button  from '../../components/Button';
+import Logo from '../../components/Logo';
 
 import IconEyeOpen from '../../assets/icon-eye-open.png';
 import IconEyeClosed from '../../assets/icon-eye-closed.png';
@@ -69,6 +70,7 @@ export default function SignIn() {
 
   return (
     <div className={styles.container}>
+      <Logo />
       <form onSubmit={handleSubmit}>
         <div className={styles.content}>
           <h1>Faça o Login</h1>
@@ -104,7 +106,7 @@ export default function SignIn() {
             </div>
           </div> 
           <div className={styles.forgotLink}>
-            <Link href={'/forgot'}>Esqueceu sua senha? clique aqui!</Link>
+            <Link href={'/forgot'}>Esqueci minha senha</Link>
           </div> 
           <Button 
             text='Entrar'

@@ -1,0 +1,10 @@
+.contentLogo {
+  position: absolute;
+  top: 90px;
+
+  font-size: 36px;
+}
+
+.contentLogo span {
+  color: var(--green);
+}

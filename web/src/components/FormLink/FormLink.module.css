@@ -1,0 +1,41 @@
+.contentFormLink {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 450px;
+  height: 180px;
+
+  padding: 16px;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px 2px var(--gray);
+
+  background-color: whitesmoke;
+}
+
+.formLink {
+  width: 100%;
+
+  font-weight: 500;
+
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray);
+}
+
+.input label {
+  font-size: 12px;
+}
+.input input {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 768px) {
+  .contentFormLink {
+    width: 350px;
+  }
+}

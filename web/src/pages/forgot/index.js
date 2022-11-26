@@ -6,7 +6,7 @@ import api from '../../services/api';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-
+import Logo from '../../components/Logo';
 
 
 export default function Forgot() {
@@ -44,6 +44,7 @@ export default function Forgot() {
 
   return (
     <div className={styles.container}>
+      <Logo />
       <form onSubmit={handleSubmit}>
         <div className={styles.content}> 
           <h1 className={styles.title}>Redefinição de Senha</h1>

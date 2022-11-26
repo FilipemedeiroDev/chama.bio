@@ -3,8 +3,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.574);
   width: 100%;
-  min-height: 100vh;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .content {
@@ -16,9 +23,18 @@
   width: 100%;
   border-radius: 10px;
   padding: 30px;
-  box-shadow: 2px 2px 6px 2px var(--gray);
+  background-color: white;
+
+  position: relative;
 }
 
+.closeModal {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+
+  cursor: pointer;
+}
 .contentProfile {
   display: flex;
   flex-direction: column;
@@ -48,8 +64,9 @@
 .inputFile label {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 40px;
-  padding: 0px 24px;
+  padding: 4px;
   border: none;
   border-radius: 10px;
   background: var(--gray);
@@ -71,6 +88,7 @@
 .buttonUpload {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-top: 6px;
   width: 190px;
   height: 40px;
@@ -78,10 +96,10 @@
   border: none;
   border-radius: 10px;
   background: var(--green);
-  padding: 12px 40px;
   color: white;
   font-weight: 700;
   font-size: 16px;
+  text-align: center;
 }
 
 .buttonUpload:hover {
@@ -91,6 +109,7 @@
 .contentForm {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .contentForm label {
@@ -106,23 +125,50 @@
   display: flex;
   flex-direction: column;
 
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .inputColor label {
   font-size: 12px;
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .container {
-    padding: 30% 58%;
+    padding-top: 130px;
+  }
+
+  .content {
+    width: 350px;
+    height: 500px;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .closeModal {
+    top: -50px;
+    right: 0px;
+  }
+
+  .contentUpload {
+    margin-top: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .inputFile label {
+    width: 160px;
+    font-weight: 500;
     font-size: 14px;
   }
 
   .buttonUpload {
+    width: 160px;
+    font-weight: 500;
     font-size: 14px;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
   }
 }

@@ -24,8 +24,13 @@
 .nav {
   display: flex;
   align-items: center;
-  margin-right: 20%;
+  margin-right: 280px;
   gap: 30px;
+}
+
+.nav .logout {
+  position: absolute;
+  right: 5px;
 }
 
 .sideBar {
@@ -77,6 +82,21 @@
   display: none;
 }
 
+.logout {
+  display: flex;
+
+  gap: 10px;
+
+  padding-right: 40px;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout:hover {
+  color: var(--green);
+}
+
 @media (max-width: 768px) {
   .nav {
     display: none;
@@ -88,6 +108,13 @@
 
   .sideBar {
     display: flex;
+    align-items: center;
+  }
+
+  .sideBar .logout {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
   }
 
   .closeSideBar {

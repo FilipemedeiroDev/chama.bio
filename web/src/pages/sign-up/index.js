@@ -98,7 +98,7 @@ export default function SignUp() {
     return (
       <div className={styles.container}>
         <Logo />
-        <form on onSubmit={handleSubmit}>
+        <form>
           <div className={styles.content}>
             <h1>Cadastre-se</h1>
             <div className={styles.inputContent}>
@@ -109,7 +109,7 @@ export default function SignUp() {
                   placeholder='Digite seu nome'
                   name='name'
                   value={form.name}
-                  handleChangeInput={handleChangeInput}
+                  handle={handleChangeInput}
                 />
                 {errorName && <span>O campo nome é obrigatório</span>}
               </div>
@@ -120,7 +120,7 @@ export default function SignUp() {
                   placeholder='Digite seu e-mail'
                   name='email'
                   value={form.email}
-                  handleChangeInput={handleChangeInput}
+                  handle={handleChangeInput}
                 />
                 {errorEmail && <span>O campo e-mail é obrigatório</span>}
               </div>
@@ -131,15 +131,15 @@ export default function SignUp() {
                   placeholder='****'
                   name='password'
                   value={form.password}
-                  handleChangeInput={handleChangeInput}
+                  handle={handleChangeInput}
                 />
                 {errorPassword && <span>O campo senha é obrigatório</span>}
                 <Image 
-                className={styles.iconEye}
-                src={showPassword ? IconEyeOpen : IconEyeClosed} 
-                alt='icone olho'
-                width={20}
-                onClick={handleShowPassword}
+                  className={styles.iconEye}
+                  src={showPassword ? IconEyeOpen : IconEyeClosed} 
+                  alt='icone olho'
+                  width={20}
+                  onClick={handleShowPassword}
                 />
               </div>
               <div>
@@ -156,6 +156,7 @@ export default function SignUp() {
             </div>
             <Button 
               text='Cadastrar'
+              handle={handleSubmit}
             />
             <div className={styles.spanLink}>
               <span>Já é cadastrado? <Link href={'/sign-in'}>Clique aqui!</Link></span>

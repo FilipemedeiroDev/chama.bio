@@ -82,7 +82,7 @@ export default function SignIn() {
                 placeholder='Digite seu e-mail'
                 name='email'
                 value={form.email}
-                handleChangeInput={handleChangeInput}
+                handle={handleChangeInput}
               />
               { errorEmail && <span>O campo e-mail é obrigatório</span> }
             </div>
@@ -93,7 +93,7 @@ export default function SignIn() {
                   placeholder='****'
                   name='password'
                   value={form.password}
-                  handleChangeInput={handleChangeInput}
+                  handle={handleChangeInput}
                 />
                  { errorPassword && <span>O campo Senha é obrigatório</span> }
                 <Image 
@@ -110,7 +110,7 @@ export default function SignIn() {
           </div> 
           <Button 
             text='Entrar'
-            handleSubmit={handleSubmit}
+            handle={handleSubmit}
           />
           <div className={styles.spanLink}>
             <span>Ainda não é cadastrado? <Link href={'/sign-up'}>Clique aqui!</Link></span>

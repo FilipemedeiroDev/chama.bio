@@ -1,3 +1,4 @@
+const UserModel = require('../Models/UserModel');
 const UserProfile = require('../Models/UserProfile');
 const supabase = require('../supabaseConfig');
 
@@ -12,6 +13,24 @@ class ProfileController {
     } catch (error) {
       return res.status(500).json({ message:  error.message});
     }
+  }
+
+  async getProfileByUsername(req, res) {
+      const { username } = req.params;
+      
+      try {
+        const user = await UserModel.findOne({ username: username })
+
+        if(!user) {
+          return res.status(400).json({message: 'Usuário não encontrado.'})
+        }
+        
+        const profile = await UserProfile.find({user_id: user._id})
+
+        return res.status(200).json(profile)
+      } catch (error) {
+        return res.status(500).json({ message:  error.message});
+      }
   }
 
   async uploadAvatar(req, res) {
@@ -93,7 +112,10 @@ class ProfileController {
         return res.status(400).json({message: 'Não foi possível atualizar o perfil do usuário.'})
       }
       
-      return res.status(200).json({ message: 'Perfil atualizado com sucesso!'})
+      const updatedProfile = await UserProfile.find({user_id: userId})
+
+      
+      return res.status(200).json(updatedProfile)
     } catch (error) {
       return res.status(500).json({ message:  error.message});
     }

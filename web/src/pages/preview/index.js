@@ -9,10 +9,6 @@ import ModalProfile from '../../components/ModalProfile';
 export default function Preview() {
     const [showModalProfile, setShowModalProfile] = useState(false);
 
-    const handleCloseModal = () => {
-      setShowModalProfile(false)
-    }
-
     return (
       <div className={styles.container}>
         <Header 
@@ -24,9 +20,9 @@ export default function Preview() {
             width: '350px',
             marginTop: '120px'
           }}
-          clickFunction={() => setShowModalProfile(true)}
+          handle={() => setShowModalProfile(true)}
         />
-        {showModalProfile && <ModalProfile clickFunction={handleCloseModal}/>}
+        {showModalProfile && <ModalProfile setShowModalProfile={setShowModalProfile}/>}
       </div> 
     )
 }

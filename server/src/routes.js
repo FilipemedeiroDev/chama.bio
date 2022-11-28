@@ -15,6 +15,8 @@ routes.post('/users/login', UsersController.Login)
 routes.post('/users/forgot', UsersController.Forgot)
 routes.post('/users/reset/:code', UsersController.Reset)
 
+
+routes.get('/profiles/:username', ProfileController.getProfileByUsername);
 routes.get('/profiles', authentication, ProfileController.getProfile);
 routes.post('/profiles/update', authentication, ProfileController.updateProfile);
 routes.patch('/profiles/avatar', authentication, upload.single('avatar'), ProfileController.uploadAvatar);

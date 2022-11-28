@@ -15,12 +15,6 @@ export default function Home() {
   const [links, setLinks] = useState([]);
   const [profile, setProfile] = useState({});
 
-  const handleCloseModal = (link) => {
-    setShowFormNewLink(!showFormNewLink)
-    if(!link){
-      setLinks(prev => [...prev, data])
-    }
-  }
 
   async function handleDelete(linkId) {
     try {
@@ -73,13 +67,14 @@ export default function Home() {
               width: '350px',
               height: '50px'
             }}
-            clickFunction={() => setShowFormNewLink(true)}
+            handle={() => setShowFormNewLink(true)}
           />
           {
             showFormNewLink &&
             <div className={styles.contentFormLink}>
               <FormLink 
-                clickFunction={handleCloseModal}
+                setShowFormNewLink={setShowFormNewLink}
+                setLinks={setLinks}
               />
             </div>
           }
@@ -96,8 +91,10 @@ export default function Home() {
                       style={{
                         width: '300px',
                         borderRadius: '50px',
-                        backgroundColor: profile.background_button_color,
-                        color: profile.text_color
+                        backgroundColor: !profile.background_button_color  ?
+                        '#000000' : profile.background_button_color,
+                        color: !profile.text_color ?
+                        '#00000' : profile.text_color
                       }}
                     />
                   </Link>

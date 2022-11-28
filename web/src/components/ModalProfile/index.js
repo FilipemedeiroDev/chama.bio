@@ -10,7 +10,7 @@ import api from '../../services/api';
 import BlankImageProfile from '../../assets/blank-image-profile.png';
 import { FaTimes } from 'react-icons/fa';
 
-export default function ModalProfile({ clickFunction }) {
+export default function ModalProfile({ setShowModalProfile }) {
   const [profile, setProfile] = useState({})
   const [image, setImage] = useState('');
   const [text, setText] = useState('');
@@ -18,12 +18,16 @@ export default function ModalProfile({ clickFunction }) {
     description: '',
     background_color: '',
     background_button_color: '',
-    text_color: ''
+    text_color:''
   })
   
   const length = 150 - text.length
 
   const inputFileRef = useRef(null);
+
+    const handleCloseModal = () => {
+      setShowModalProfile(false)
+    }
 
    function handleChangeInput(e) {
     setForm({...form, [e.target.name]: e.target.value})
@@ -55,19 +59,40 @@ export default function ModalProfile({ clickFunction }) {
   
     }
 
-    async function handleSubmit() {
-        
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        if(!form.description) {
+          form.description = profile.description
+        }
+
+        if(!form.background_color) {
+          form.background_color = profile.background_color
+        }
+       
+        if(!form.background_button_color) {
+          form.background_button_color = profile.background_button_color
+        }
+       
+        if(!form.text_color) {
+          form.text_color = profile.text_color
+        }
+       
        
         try {
-          await api.post('/profiles/update', {
+
+          const { data } = await api.post('/profiles/update', {
             description: form.description.trim(),
             background_color: form.background_color,
             background_button_color: form.background_button_color,
             text_color: form.text_color
           })
 
+          setForm({...prev => data})
+          setShowModalProfile(false)
+
         } catch (error) {
-          alert(error.response.data.message)
+          alert(error.message)
         return
         }
     }
@@ -95,7 +120,7 @@ export default function ModalProfile({ clickFunction }) {
               <FaTimes 
                 color='white'
                 fontSize={'30px'}
-                onClick={clickFunction}
+                onClick={handleCloseModal}
               />
             </div>
             <div className={styles.contentProfile}>
@@ -169,6 +194,7 @@ export default function ModalProfile({ clickFunction }) {
                           width: '250px',
                           margin: 0, 
                         }}
+                        
                       />
                   </div>   
                   <div className={styles.inputColor}>
@@ -179,10 +205,9 @@ export default function ModalProfile({ clickFunction }) {
                       id='inputColor'
                       name='background_button_color'
                       onChange={handleChangeInput}
-                      placement='rigth'
                       style={{
                       width: '250px',
-                      margin: 0, 
+                      margin: 0,
                       }}
                     />
                   </div>
@@ -203,7 +228,7 @@ export default function ModalProfile({ clickFunction }) {
                 </div>
                 <Button 
                   text='Salvar'
-                  clickFunction={handleSubmit}
+                  handle={handleSubmit}
                   style={{
                     height: '40px'
                   }}

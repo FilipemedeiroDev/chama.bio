@@ -3,14 +3,23 @@
   top: 90px;
 
   font-size: 36px;
+  text-align: center;
 }
 
 .contentLogo span {
   color: var(--green);
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .contentLogo {
     top: 60px;
+  }
+}
+
+
+@media  (max-width: 1366px) {
+  .contentLogo {
+    top: 50px;
+    font-size: 30px;
   }
 }

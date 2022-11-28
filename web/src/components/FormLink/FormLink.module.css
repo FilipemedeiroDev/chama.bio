@@ -67,6 +67,7 @@
   transform: scale(1.01);
 }
 
+
 @media screen and (max-width: 768px) {
   .contentFormLink {
     width: 350px;

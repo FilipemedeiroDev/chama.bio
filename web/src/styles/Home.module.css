@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
 }
 
 .content {
@@ -24,7 +24,9 @@
   border-top: 1px solid var(--gray);
   padding-top: 10px;
 }
-
+.contentFormLink {
+  width: 100%;
+}
 .contentLink {
   display: flex;
   align-items: center;
@@ -41,6 +43,7 @@
 }
 
 @media screen and (max-width: 768px) {
+ 
   .contentLink {
     padding-right: 10%;
     padding-left: 4%;

@@ -172,3 +172,44 @@
     height: 90px;
   }
 }
+
+@media  screen and (max-width: 1366px) {
+  .container {
+    padding-top: 120px;
+  }
+
+  .content {
+    width: 350px;
+    height: 500px;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .closeModal {
+    top: -50px;
+    right: 0px;
+  }
+
+  .contentUpload {
+    margin-top: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+  }
+
+  .inputFile label {
+    width: 160px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .buttonUpload {
+    width: 160px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+  }
+}

@@ -149,7 +149,7 @@ export default function SignUp() {
                   placeholder='Escolha um nome de usuário'
                   name='username'
                   value={form.username}
-                  handleChangeInput={handleChangeInput}
+                  handle={handleChangeInput}
                 />
                 {errorUsername && <span>O campo username é obrigatório</span>}
               </div>

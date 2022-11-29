@@ -4,7 +4,6 @@ import { useEffect, useState, useRef}  from 'react';
 import Image from 'next/image';
 import Button from '../Button';
 
-
 import api from '../../services/api';
 
 import BlankImageProfile from '../../assets/blank-image-profile.png';
@@ -12,20 +11,20 @@ import { FaTimes } from 'react-icons/fa';
 
 export default function ModalProfile({ setShowModalProfile }) {
   const [profile, setProfile] = useState({})
-  const [image, setImage] = useState('');
   const [text, setText] = useState('');
   const [form, setForm] = useState({
     description: '',
     background_color: '',
     background_button_color: '',
-    text_color:''
+    text_color:'',
+    button_text_color: ''
   })
   
   const length = 150 - text.length
 
   const inputFileRef = useRef(null);
 
-    const handleCloseModal = () => {
+    function handleCloseModal(){
       setShowModalProfile(false)
     }
 
@@ -35,12 +34,13 @@ export default function ModalProfile({ setShowModalProfile }) {
 
     async function handleUpload(e) {
       e.preventDefault();
+      const image = e.target.files[0];
 
       try {
         const formData = new FormData();
         formData.append('avatar', image, image.name)
         
-        const { data }= await api.patch('/profiles/avatar', formData, {
+        const { data } = await api.patch('/profiles/avatar', formData, {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
@@ -54,23 +54,17 @@ export default function ModalProfile({ setShowModalProfile }) {
         })
       } catch (error) {
         console.log(error.message)
-        return
       }
-  
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if(!form.description) {
-          form.description = profile.description
-        }
-
         if(!form.background_color) {
           form.background_color = profile.background_color
         }
        
-        if(!form.background_button_color) {
+        if(!form.background_button_color) {   
           form.background_button_color = profile.background_button_color
         }
        
@@ -85,7 +79,8 @@ export default function ModalProfile({ setShowModalProfile }) {
             description: form.description.trim(),
             background_color: form.background_color,
             background_button_color: form.background_button_color,
-            text_color: form.text_color
+            text_color: form.text_color,
+            button_text_color: form.button_text_color
           })
 
           setForm({...prev => data})
@@ -99,18 +94,28 @@ export default function ModalProfile({ setShowModalProfile }) {
 
     const getProfile = async () =>{
       try {
-        const response = await api.get('/profiles')
-        setProfile(response.data[0])
-        
+        const response = await api.get('/profiles/me')
+        const profile = response.data;
+        setProfile(profile)
+        setForm(prev => {
+          return {
+            ...prev,
+            background_color: profile.background_color,
+            background_button_color: profile.background_button_color,
+            text_color: profile.text_color,
+            description: profile.description,
+            button_text_color: profile.button_text_color
+          }
+        })      
       } catch (error) {
         console.log(error.message)
         return
       }
     }
 
-    useEffect(()=>{
+  useEffect(()=>{
     getProfile()
-    },[])
+  },[])
 
   return (
       <div className={styles.container}>
@@ -151,16 +156,9 @@ export default function ModalProfile({ setShowModalProfile }) {
                       type='file'
                       id='inputFile'
                       ref={inputFileRef}
-                      onChange={e => setImage(e.target.files[0])}
+                      onChange={handleUpload}
                     />
                   </div>
-                  <button 
-                    className={styles.buttonUpload}
-                    type='button'
-                    onClick={handleUpload}
-                  >
-                   Fazer upload
-                  </button>
                 </div>
               </div>
               <div className={styles.contentForm}>
@@ -191,7 +189,6 @@ export default function ModalProfile({ setShowModalProfile }) {
                         name='background_color'
                         onChange={handleChangeInput}
                         style={{
-                          width: '250px',
                           margin: 0, 
                         }}
                         
@@ -206,7 +203,6 @@ export default function ModalProfile({ setShowModalProfile }) {
                       name='background_button_color'
                       onChange={handleChangeInput}
                       style={{
-                      width: '250px',
                       margin: 0,
                       }}
                     />
@@ -220,7 +216,19 @@ export default function ModalProfile({ setShowModalProfile }) {
                       name='text_color'
                       onChange={handleChangeInput}
                       style={{
-                      width: '250px',
+                      margin: 0, 
+                      }}
+                    />
+                  </div>
+                  <div className={styles.inputColor}>
+                    <label htmlFor='inputColor'>Cor do texto do botão</label>
+                    <input 
+                      type='color'
+                      value={form.button_text_color}
+                      id='inputColor'
+                      name='button_text_color'
+                      onChange={handleChangeInput}
+                      style={{
                       margin: 0, 
                       }}
                     />

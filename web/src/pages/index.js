@@ -39,8 +39,8 @@ export default function Home() {
 
   const getProfile = async () =>{
     try {
-      const response = await api.get('/profiles')
-      setProfile(response.data[0])
+      const response = await api.get('/profiles/me')
+      setProfile(response.data)
       
     } catch (error) {
       console.log(error.message)
@@ -91,10 +91,8 @@ export default function Home() {
                       style={{
                         width: '300px',
                         borderRadius: '50px',
-                        backgroundColor: !profile.background_button_color  ?
-                        '#000000' : profile.background_button_color,
-                        color: !profile.text_color ?
-                        '#00000' : profile.text_color
+                        backgroundColor: profile.background_button_color,
+                        color:profile.button_text_color
                       }}
                     />
                   </Link>

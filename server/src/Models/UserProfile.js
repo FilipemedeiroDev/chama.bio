@@ -9,24 +9,28 @@ const UserProfileSchema = new Schema({
   },
   description:{
     type: String,
-    default: null
+    default: ''
   },
   avatarUrl: {
     type: String,
-    default: null
+    default: ''
   },
   background_color:{
     type: String,
-    default: null
+    default: '#ffffff'
   },
   background_button_color: {
     type: String,
-    default: null
+    default: '#000000'
   },
   text_color: {
     type: String,
-    default: null
+    default: '#000000'
   },
+  button_text_color: {
+    type: String,
+    default: '#ffffff'
+  }
 });
 
 const UserProfileModel = mongoose.model('user_profile', UserProfileSchema);

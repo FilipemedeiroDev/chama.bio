@@ -1,5 +1,6 @@
 const UserModel = require('../Models/UserModel');
 const UserProfile = require('../Models/UserProfile');
+const UserLink = require('../Models/UserLink');
 const supabase = require('../supabaseConfig');
 
 class ProfileController {
@@ -7,7 +8,7 @@ class ProfileController {
     const { id: userId } = req.user;
 
     try {
-      const userProfile = await UserProfile.find({user_id: userId});
+      const userProfile = await UserProfile.findOne({user_id: userId});
 
       return res.status(200).json(userProfile)
     } catch (error) {
@@ -25,10 +26,17 @@ class ProfileController {
           return res.status(400).json({message: 'Usuário não encontrado.'})
         }
         
-        const profile = await UserProfile.find({user_id: user._id})
+        const profile = await UserProfile.findOne({user_id: user._id})
 
-        return res.status(200).json(profile)
+        const links = await UserLink.find({user_id: profile.user_id})
+
+        return res.status(200).json({
+          name: user.name,
+          profile,
+          links
+        })
       } catch (error) {
+        console.log(error)
         return res.status(500).json({ message:  error.message});
       }
   }
@@ -37,17 +45,16 @@ class ProfileController {
     const {id: userId, username} = req.user;
     const name = `${userId}_${username}`
     try {
-      
+
       const { data, error } = await supabase
       .storage
       .from(process.env.SUPABASE_BUCKET)
       .upload(`${username}/${name}`, req.file.buffer, {
         contentType: req.file.mimetype,
-        cacheControl: 3600,
+        cacheControl: 1,
         upsert: true
       })
-      
-      
+
       if (error) {
         return res.status(400).json(error.message)
       }
@@ -55,7 +62,9 @@ class ProfileController {
       const { data: PublicUrl, error: errorPublicUrl } = supabase
       .storage
       .from(process.env.SUPABASE_BUCKET)
-      .getPublicUrl(`${username}/${name}`)
+      .getPublicUrl(`${username}/${name}?t=${new Date().toISOString()}`, {
+
+      })
 
     if (errorPublicUrl) {
       return res.status(400).json(error.message)
@@ -97,7 +106,7 @@ class ProfileController {
 
   async updateProfile(req, res) {
     const {id: userId} = req.user;
-    const {description, background_color, background_button_color, text_color } = req.body;
+    const {description, background_color, background_button_color, text_color, button_text_color } = req.body;
 
     try {
       
@@ -105,7 +114,8 @@ class ProfileController {
         description,
         background_color,
         background_button_color,
-        text_color
+        text_color,
+        button_text_color
       })
 
       if(userUpdated.acknowledged === false){

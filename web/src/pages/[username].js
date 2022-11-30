@@ -17,7 +17,6 @@ export default function Username({ user }) {
     await navigator.share(shareData)
   }
 
- console.log(user)
   return (
     <div className={styles.container}
       style={{
@@ -88,15 +87,24 @@ export default function Username({ user }) {
   )
 }
 
-
-
 export async function getServerSideProps(ctx) {
   const { username } = ctx.query;
-  const { data: user } = await api.get(`/profiles/${username}`)
- 
-  return {
-    props: {
-      user
+  try {
+    const { data: user } = await api.get(`/profiles/${username}`)
+
+    return {
+      props: {
+        user
+      }
+    }
+  } catch (error) {
+    if (error) {
+      return {
+        redirect: {
+          destination: '/not-found',
+          permanent: false,
+        },
+      }
     }
   }
 }

@@ -23,7 +23,7 @@ class ProfileController {
         const user = await UserModel.findOne({ username: username })
 
         if(!user) {
-          return res.status(400).json({message: 'Usuário não encontrado.'})
+          return res.status(404).json({message: 'Usuário não encontrado.'})
         }
         
         const profile = await UserProfile.findOne({user_id: user._id})

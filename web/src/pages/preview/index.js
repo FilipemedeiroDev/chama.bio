@@ -26,3 +26,18 @@ export default function Preview() {
       </div> 
     )
 }
+
+export async function getServerSideProps(ctx) {
+  const { cookies } = ctx.req
+ 
+  if(!cookies.token) {
+    return {
+      redirect: {
+        destination: '/sign-in',
+        permanent: false
+      }
+    }
+  }
+  
+  return { props: {} }
+}

@@ -15,7 +15,6 @@ export default function Home() {
   const [links, setLinks] = useState([]);
   const [profile, setProfile] = useState({});
 
-
   async function handleDelete(linkId) {
     try {
       await api.delete(`/links/${linkId}`);
@@ -111,4 +110,19 @@ export default function Home() {
        
     </div>
   )
+}
+
+export async function getServerSideProps(ctx) {
+    const { cookies } = ctx.req
+   
+    if(!cookies.token) {
+      return {
+        redirect: {
+          destination: '/sign-in',
+          permanent: false
+        }
+      }
+    }
+    
+    return { props: {} }
 }

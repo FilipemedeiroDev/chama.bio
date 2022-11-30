@@ -60,11 +60,10 @@
 }
 
 @media (max-width: 1366px) {
-
   .content {
     margin-top: 90px;
   }
- .content h1 {
-  margin-bottom: 10px;
- }
+  .content h1 {
+    margin-bottom: 10px;
+  }
 }

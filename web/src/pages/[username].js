@@ -26,8 +26,8 @@ export default function Username({ user }) {
       <div className={styles.avatar}>
         <Image 
             src={user.profile.avatarUrl}
-            width={190}
-            height={190}
+            width={150}
+            height={150}
             quality={100}
             alt='avatar'  
             priority
@@ -52,16 +52,15 @@ export default function Username({ user }) {
         color: user.profile.text_color
       }}
       >{user.name}</h2>
-      <div className={styles.description}>
-        <p
+      <div 
+        className={styles.description}
         style={{
-          color: user.profile.text_color,
-          wordBreak: 'break-all',
-          padding: 'auto'
-        }}
+            color: user.profile.text_color,
+          }}
         >
+          <span>
           {user.profile.description}
-        </p>
+          </span>
       </div>
       {
         user.links.map(link => (
@@ -69,9 +68,11 @@ export default function Username({ user }) {
          <div className={styles.link}>
            <Link href={link.destination} target='_blank'>
              <Button 
+               id='link'
                text={link.title}
                style={{
-                 width: '300px',
+                 width: '350px',
+                 height: '60px',
                  borderRadius: '10px',
                  backgroundColor: user.profile.background_button_color,
                  color: user.profile.button_text_color

@@ -57,9 +57,8 @@ export default function ModalProfile({ setShowModalProfile }) {
       }
     }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-
+    async function handleSubmit() {
+        
         if(!form.background_color) {
           form.background_color = profile.background_color
         }
@@ -169,8 +168,8 @@ export default function ModalProfile({ setShowModalProfile }) {
                   name='description'
                   value={form.description}
                   style={{
-                    height: '60px',
-                    padding: '8px',
+                    height: '90px',
+                    padding: '12px',
                     borderRadius: '10px',
                     resize: 'none',
                   }}

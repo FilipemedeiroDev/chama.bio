@@ -45,7 +45,7 @@ export default function Header({ page }) {
         <ul className={styles.ul}>
           <Link href='/preview'>
             <li className={page === 'preview' ? styles.liActive : styles.li}>
-              Configurações
+            preview
             </li>
           </Link>
         </ul>

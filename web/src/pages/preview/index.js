@@ -6,9 +6,9 @@ import Button from '../../components/Button';
 import ModalProfile from '../../components/ModalProfile';
 
 
-export default function Preview() {
+export default function Preview({ cookies }) {
     const [showModalProfile, setShowModalProfile] = useState(false);
-
+    
     return (
       <div className={styles.container}>
         <Header 
@@ -23,6 +23,16 @@ export default function Preview() {
           handle={() => setShowModalProfile(true)}
         />
         {showModalProfile && <ModalProfile setShowModalProfile={setShowModalProfile}/>}
+          <div className={styles.wrapper}>
+            <div className={styles.screen}>
+              <iframe 
+              className={styles.iframe}
+              src={`http://localhost:3000/${cookies.username}`} 
+              frameborder='0'
+              >
+              </iframe>  
+            </div>
+          </div>
       </div> 
     )
 }
@@ -39,5 +49,5 @@ export async function getServerSideProps(ctx) {
     }
   }
   
-  return { props: {} }
+  return { props: { cookies } }
 }

@@ -26,9 +26,9 @@ export default function Preview({ cookies }) {
           <div className={styles.wrapper}>
             <div className={styles.screen}>
               <iframe 
-              className={styles.iframe}
-              src={`http://localhost:3000/${cookies.username}`} 
-              frameborder='0'
+                className={styles.iframe}
+                src={`http://localhost:3000/${cookies.username}`} 
+                frameborder='0'
               >
               </iframe>  
             </div>

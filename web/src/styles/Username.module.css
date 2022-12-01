@@ -4,6 +4,9 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .container h2 {

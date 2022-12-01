@@ -1,3 +1,7 @@
+.buttonContainer {
+  width: 100%;
+}
+
 .button {
   margin-top: 20px;
   width: 100%;

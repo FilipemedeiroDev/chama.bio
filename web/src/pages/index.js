@@ -6,25 +6,13 @@ import Button from '../components/Button';
 import FormLink from '../components/FormLink';
 
 import api from '../services/api';
-import Link from 'next/link';
 
-import { RiDeleteBin5Line } from "react-icons/Ri";
+import ContentLink from '../components/ContentLink';
 
 export default function Home() {
   const [showFormNewLink, setShowFormNewLink] = useState(false);
   const [links, setLinks] = useState([]);
-  const [profile, setProfile] = useState({});
-
-  async function handleDelete(linkId) {
-    try {
-      await api.delete(`/links/${linkId}`);
-      setLinks(prev => prev.filter(link => link._id !== linkId))
-    } catch (error) {
-      console.log(error.message)
-      return
-    }
-  }
-
+  
   const getLinks = async () => {
     try {
       const response = await api.get('/links')
@@ -36,21 +24,8 @@ export default function Home() {
     }
   }
 
-  const getProfile = async () =>{
-    try {
-      const response = await api.get('/profiles/me')
-      setProfile(response.data)
-      
-    } catch (error) {
-      console.log(error.message)
-      return
-    }
-  }
-
-
   useEffect(() => {
     getLinks()
-    getProfile()
   },[])
 
 
@@ -82,32 +57,15 @@ export default function Home() {
           </div>
           {
             links.map(link => (
-              <div className={styles.contentLink} key={link._id}>
-                <div className={styles.link}>
-                  <Link href={link.destination} target='_blank'>
-                    <Button 
-                      text={link.title}
-                      style={{
-                        width: '300px',
-                        borderRadius: '50px',
-                        backgroundColor: profile.background_button_color,
-                        color:profile.button_text_color
-                      }}
-                    />
-                  </Link>
-                </div>
-                <div className={styles.deleteIcon}>
-                  <RiDeleteBin5Line 
-                    fontSize='24px'
-                    cursor='pointer'
-                    onClick={() => handleDelete(link._id)}
-                  />
-                </div>
+              <div className={styles.myLink} key={link._id}>
+                <ContentLink 
+                  link={link}
+                  setLinks={setLinks}                
+                />
               </div>
             ))
           }
-        </div>
-       
+        </div>   
     </div>
   )
 }

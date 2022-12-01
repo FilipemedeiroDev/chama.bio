@@ -64,14 +64,11 @@ export default function Username({ user }) {
       </div>
       {
         user.links.map(link => (
-        <div className={styles.contentLink} key={link._id}>
-         <div className={styles.link}>
-           <Link href={link.destination} target='_blank'>
+           <Link key={link._id} href={link.destination} target='_blank' style={{ width: '100%' }}>
              <Button 
                id='link'
                text={link.title}
                style={{
-                 width: '350px',
                  height: '60px',
                  borderRadius: '10px',
                  backgroundColor: user.profile.background_button_color,
@@ -79,9 +76,6 @@ export default function Username({ user }) {
                }}
              />
            </Link>
-         </div>
-       </div>
-
         ))
       }
     </div>

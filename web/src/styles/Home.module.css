@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+
   width: 100%;
+  height: 100vh;
 }
 
 .content {
@@ -12,6 +13,11 @@
   align-items: center;
 
   margin-top: 100px;
+  padding-bottom: 60px;
+}
+
+.contentFormLink {
+  width: 100%;
 }
 
 .contentH2 {
@@ -24,32 +30,17 @@
   border-top: 1px solid var(--gray);
   padding-top: 10px;
 }
-.contentFormLink {
-  width: 100%;
-}
-.contentLink {
+
+.myLink {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding-right: 6%;
+  width: 100%;
 
   position: relative;
 }
 
 .deleteIcon {
   position: absolute;
-  top: 35px;
-  right: -12px;
-}
-
-@media screen and (max-width: 768px) {
-  .contentLink {
-    padding-right: 10%;
-    padding-left: 4%;
-  }
-
-  .deleteIcon {
-    top: 35px;
-    right: 5px;
-  }
+  right: 10px;
+  bottom: 5px;
 }

@@ -1,5 +1,6 @@
 import styles from './SignIn.module.css'
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 import { setItem } from '../../utils/cookies';
@@ -64,7 +65,7 @@ export default function SignIn() {
       router.push('/')
     } catch (error) {
       console.log(error)
-       alert(error.response.data.message)
+       toast.error(error.response.data.message)
        return
     }
   }

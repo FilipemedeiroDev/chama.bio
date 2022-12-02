@@ -1,5 +1,6 @@
 import styles from './SignUp.module.css';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -86,11 +87,11 @@ export default function SignUp() {
             username: form.username.trim()
           })
 
-          alert(response.data.message)
+          toast.success(response.data.message)
           route.push('sign-in')
         } catch (error) {
           console.log(error)
-          alert(error.response.data.message)
+          toast.error(error.response.data.message)
           return
         }
     }

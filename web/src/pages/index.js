@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify'
 
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -71,8 +72,8 @@ export default function Home() {
 }
 
 export async function getServerSideProps(ctx) {
-    const { cookies } = ctx.req
-   
+  const { cookies } = ctx.req
+    
     if(!cookies.token) {
       return {
         redirect: {

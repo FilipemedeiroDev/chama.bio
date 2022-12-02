@@ -29,6 +29,7 @@ export default function Preview({ cookies }) {
               className={styles.iframe}
               src={`http://localhost:3000/${cookies.username}`} 
               frameborder='0'
+              
               >
               </iframe>  
             </div>
@@ -39,7 +40,7 @@ export default function Preview({ cookies }) {
 
 export async function getServerSideProps(ctx) {
   const { cookies } = ctx.req
- 
+  
   if(!cookies.token) {
     return {
       redirect: {

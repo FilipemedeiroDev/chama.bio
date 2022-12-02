@@ -1,5 +1,6 @@
 import styles from './Reset.module.css';
 import {  useState } from 'react';
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 import api from '../../services/api'
@@ -52,7 +53,7 @@ export default function Reset() {
       router.push('/sign-in')
     } catch (error) {
       console.log(error)
-      alert(error.response.data.message)
+      toast.error(error.response.data.message)
       router.push('sign-in')
       return
     }

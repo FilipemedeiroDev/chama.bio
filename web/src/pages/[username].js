@@ -6,6 +6,8 @@ import api from '../services/api';
 
 import Button from '../components/Button';
 
+import BlankImageProfile from '../assets/blank-image-profile.png'
+
 import { BsFillShareFill } from 'react-icons/Bs'
 
 export default function Username({ user }) {
@@ -25,7 +27,7 @@ export default function Username({ user }) {
     >
       <div className={styles.avatar}>
         <Image 
-            src={user.profile.avatarUrl}
+            src={!user.profile.avatarUrl ? BlankImageProfile : user.profile.avatarUrl}
             width={150}
             height={150}
             quality={100}
@@ -41,7 +43,8 @@ export default function Username({ user }) {
           style={{
             position: 'absolute',
             right:'-20px',
-            color: user.profile.text_color
+            color: user.profile.text_color,
+            cursor: 'pointer'
           }}
           fontSize='24px'
           onClick={share}
@@ -64,18 +67,20 @@ export default function Username({ user }) {
       </div>
       {
         user.links.map(link => (
-           <Link key={link._id} href={link.destination} target='_blank' style={{ width: '100%' }}>
-             <Button 
-               id='link'
-               text={link.title}
-               style={{
-                 height: '60px',
-                 borderRadius: '10px',
-                 backgroundColor: user.profile.background_button_color,
-                 color: user.profile.button_text_color
-               }}
-             />
+          <div className={styles.link} key={link._id}>
+            <Link  href={link.destination} target='_blank'>
+              <Button 
+                id='link'
+                text={link.title}
+                style={{
+                  height: '60px',
+                  borderRadius: '10px',
+                  backgroundColor: user.profile.background_button_color,
+                  color: user.profile.button_text_color
+                }}
+              />
            </Link>
+           </div>
         ))
       }
     </div>
@@ -84,6 +89,7 @@ export default function Username({ user }) {
 
 export async function getServerSideProps(ctx) {
   const { username } = ctx.query;
+
   try {
     const { data: user } = await api.get(`/profiles/${username}`)
 
@@ -93,13 +99,12 @@ export async function getServerSideProps(ctx) {
       }
     }
   } catch (error) {
-    if (error) {
       return {
         redirect: {
           destination: '/not-found',
           permanent: false,
         },
       }
-    }
+    
   }
 }

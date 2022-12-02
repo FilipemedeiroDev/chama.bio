@@ -1,5 +1,6 @@
 import styles from './Forgot.module.css'
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
 import api from '../../services/api';
@@ -35,11 +36,11 @@ export default function Forgot() {
           email: form.email.trim()
         })
 
-        alert('Email enviado com sucesso')
+        toast.success('Email enviado com sucesso')
 
         router.push('/sign-in')
       } catch (error) {
-        alert(error.response.data.message)
+        toast.error(error.response.data.message)
         return
       }
   }

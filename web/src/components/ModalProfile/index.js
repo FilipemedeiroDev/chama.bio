@@ -1,5 +1,6 @@
 import styles from './ModalProfile.module.css';
 import { useEffect, useState, useRef}  from 'react';
+import { toast } from 'react-toastify';
 
 import Image from 'next/image';
 import Button from '../Button';
@@ -86,7 +87,7 @@ export default function ModalProfile({ setShowModalProfile }) {
           setShowModalProfile(false)
 
         } catch (error) {
-          alert(error.message)
+          toast.error(error.message)
         return
         }
     }

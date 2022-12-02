@@ -25,7 +25,7 @@ export default function ContentLink({ link, setLinks }) {
 
     window.navigator.clipboard
     .writeText(linkToCopy)
-    .then(toast.success('Copiado com sucesso!'))
+    .then(toast.success('Destino opiado com sucesso!'))
   }
 
   function handleChangeInput(e) {
@@ -45,7 +45,7 @@ export default function ContentLink({ link, setLinks }) {
 
 
   return (
-    <div className={styles.link}>
+    <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.contentTitle}>
           <label>

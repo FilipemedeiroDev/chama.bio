@@ -1,23 +1,9 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  width: 100%;
-  height: 100vh;
-}
-
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  margin-top: 100px;
-  padding-bottom: 60px;
-}
-
-.contentFormLink {
   width: 100%;
+  margin-top: 100px;
 }
 
 .contentH2 {
@@ -33,9 +19,9 @@
 
 .myLink {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
-
+  width: 550px;
   position: relative;
 }
 
@@ -43,4 +29,10 @@
   position: absolute;
   right: 10px;
   bottom: 5px;
+}
+
+@media (max-width: 768px) {
+  .myLink {
+    width: 100%;
+  }
 }

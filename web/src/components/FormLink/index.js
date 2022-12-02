@@ -1,6 +1,7 @@
 import Button from '../Button';
 import styles from './FormLink.module.css';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { FaTimes } from 'react-icons/fa';
 
@@ -38,7 +39,7 @@ export default function FormLink({ setShowFormNewLink, setLinks }) {
       setShowFormNewLink(false);
       
     } catch (error) {
-      alert(error.message)
+      toast.error(error.message)
       return
     }
   }

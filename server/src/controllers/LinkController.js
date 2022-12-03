@@ -35,6 +35,38 @@ class LinkController {
     }
   }
 
+  async editLinkTitle(req, res) {
+    const { id } = req.params;
+    const { title } = req.body;
+    const {id:  userId } = req.user;
+
+    try {
+      await UserLink.updateOne({_id: id, user_id: userId}, {
+        title
+      })
+
+      return res.status(200).json({message: 'Titulo do link atualizado com sucesso'})
+    } catch (error) {
+      return res.status(500).json({ message:  error.message});
+    }
+  }
+
+  async editLinkDestination(req, res) {
+    const { id } = req.params;
+    const { destination } = req.body;
+    const {id:  userId } = req.user;
+
+    try {
+      await UserLink.updateOne({_id: id, user_id: userId}, {
+        destination
+      })
+
+      return res.status(200).json({message: 'Destino do link atualizado com sucesso'})
+    } catch (error) {
+      return res.status(500).json({ message:  error.message});
+    }
+  }
+
   async deleteLink(req, res) {
       const { id } = req.params;
 

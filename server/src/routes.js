@@ -24,6 +24,8 @@ routes.delete('/profiles/avatar', authentication, ProfileController.removeAvatar
 
 routes.get('/links', authentication, LinkController.getUserLinks);
 routes.post('/links', authentication, LinkController.createLink);
+routes.patch('/links/:id/title', authentication, LinkController.editLinkTitle);
+routes.patch('/links/:id/destination', authentication, LinkController.editLinkDestination);
 routes.delete('/links/:id', authentication, LinkController.deleteLink)
 
 module.exports = routes;

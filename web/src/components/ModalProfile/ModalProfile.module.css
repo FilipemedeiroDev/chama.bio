@@ -6,6 +6,7 @@
 
   background-color: rgba(0, 0, 0, 0.574);
   width: 100%;
+ 
 
   position: fixed;
   top: 0;
@@ -149,5 +150,11 @@
   .avatar {
     width: 120px;
     height: 120px;
+  }
+}
+
+@media (max-height: 768px) {
+  .container {
+    padding-top: 120px;
   }
 }

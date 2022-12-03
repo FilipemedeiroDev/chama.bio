@@ -12,7 +12,7 @@ import { GiCancel } from 'react-icons/Gi';
 import { MdOutlineContentCopy } from 'react-icons/Md'
 
 
-export default function ContentLink({ link, setLinks }) {
+export default function ContentLink({ link, setLinks, getLinks }) {
   const [isTitleEditable, setIsTitleEditable] = useState(false);
   const [isDestinationEditable, setIsDestinationEditable] = useState(false);
   const [form, setForm] = useState({
@@ -43,6 +43,31 @@ export default function ContentLink({ link, setLinks }) {
     }
   }
 
+  async function handleSubmit() {
+
+    if(!form.title) {
+      form.title = link.title
+    }
+
+    if(!form.destination) {
+      form.destination = link.destination
+    }
+
+    try {
+      await api.patch(`/links/${link._id}/title`, {
+        title: form.title
+      })
+
+      await api.patch(`/links/${link._id}/destination`, {
+        destination: form.destination
+      })
+      getLinks()
+      
+    } catch (error) {
+      toast.error(error.message)
+      return
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -79,6 +104,7 @@ export default function ContentLink({ link, setLinks }) {
                   height: '12px',
                 }}
                 handle={handleChangeInput}
+                handleBlur={handleSubmit}
               />
             ) : (
               <p>{link.title}</p>  
@@ -118,6 +144,7 @@ export default function ContentLink({ link, setLinks }) {
                   height: '12px',
                 }}
                 handle={handleChangeInput}
+                handleBlur={handleSubmit}
               />
             ) : (
               <p>{link.destination}</p>

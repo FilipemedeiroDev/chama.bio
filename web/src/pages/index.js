@@ -20,7 +20,7 @@ export default function Home() {
       setLinks(response.data)
       
     } catch (error) {
-      console.log(error.message)
+      toast.error(error.message)
       return
     }
   }
@@ -61,7 +61,8 @@ export default function Home() {
               <div className={styles.myLink} key={link._id}>
                 <ContentLink 
                   link={link}
-                  setLinks={setLinks}                
+                  setLinks={setLinks}
+                  getLinks={getLinks}                
                 />
               </div>
             ))

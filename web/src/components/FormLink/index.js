@@ -6,8 +6,10 @@ import { toast } from 'react-toastify';
 import { FaTimes } from 'react-icons/fa';
 
 import api from '../../services/api';
+import useProfile from '../../Hooks/useProfile';
 
-export default function FormLink({ setShowFormNewLink, setLinks }) {
+export default function FormLink({ setShowFormNewLink }) {
+  const { addLink } = useProfile()
   const [errorFormLink, setErrorFormLink] = useState(false)
   const [form, setForm] = useState({
     title: '',
@@ -35,7 +37,7 @@ export default function FormLink({ setShowFormNewLink, setLinks }) {
         title: form.title.trim(),
         destination: form.destination.trim()
       })
-      setLinks(prev => [...prev, data])
+      addLink(data)
       setShowFormNewLink(false);
       
     } catch (error) {

@@ -1,34 +1,21 @@
 import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react';
-import { toast } from 'react-toastify'
+import useProfile from '../Hooks/useProfile';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
 import FormLink from '../components/FormLink';
 
-import api from '../services/api';
-
 import ContentLink from '../components/ContentLink';
 
 export default function Home() {
+  const { links, getLinks } =  useProfile()
   const [showFormNewLink, setShowFormNewLink] = useState(false);
-  const [links, setLinks] = useState([]);
-  
-  const getLinks = async () => {
-    try {
-      const response = await api.get('/links')
-      setLinks(response.data)
-      
-    } catch (error) {
-      toast.error(error.message)
-      return
-    }
-  }
+
 
   useEffect(() => {
     getLinks()
   },[])
-
 
   return (
     <div className={styles.container}>
@@ -49,7 +36,6 @@ export default function Home() {
             <div className={styles.contentFormLink}>
               <FormLink 
                 setShowFormNewLink={setShowFormNewLink}
-                setLinks={setLinks}
               />
             </div>
           }
@@ -60,9 +46,7 @@ export default function Home() {
             links.map(link => (
               <div className={styles.myLink} key={link._id}>
                 <ContentLink 
-                  link={link}
-                  setLinks={setLinks}
-                  getLinks={getLinks}                
+                  link={link}              
                 />
               </div>
             ))

@@ -10,16 +10,18 @@ import { RiDeleteBin5Line } from "react-icons/Ri";
 import { MdEdit } from 'react-icons/Md';
 import { GiCancel } from 'react-icons/Gi';
 import { MdOutlineContentCopy } from 'react-icons/Md'
+import useProfile from '../../Hooks/useProfile';
 
 
-export default function ContentLink({ link, setLinks, getLinks }) {
+export default function ContentLink({ link }) {
+  const { updateLink, deleteLink } = useProfile()
   const [isTitleEditable, setIsTitleEditable] = useState(false);
   const [isDestinationEditable, setIsDestinationEditable] = useState(false);
   const [form, setForm] = useState({
     title: link.title,
     destination: link.destination
   })
-
+  
   function copyLink() {
     const linkToCopy = link.destination
 
@@ -35,7 +37,7 @@ export default function ContentLink({ link, setLinks, getLinks }) {
   async function handleDelete(linkId) {
     try {
       await api.delete(`/links/${linkId}`);
-      setLinks(prev => prev.filter(links => links._id !== linkId))
+      deleteLink(linkId)
      
     } catch (error) {
       console.log(error.message)
@@ -57,11 +59,16 @@ export default function ContentLink({ link, setLinks, getLinks }) {
       await api.patch(`/links/${link._id}/title`, {
         title: form.title
       })
+  
 
       await api.patch(`/links/${link._id}/destination`, {
         destination: form.destination
       })
-      getLinks()
+      updateLink({
+        ...link,
+        title: form.title,
+        destination: form.destination
+      })
       
     } catch (error) {
       toast.error(error.message)
@@ -107,7 +114,7 @@ export default function ContentLink({ link, setLinks, getLinks }) {
                 handleBlur={handleSubmit}
               />
             ) : (
-              <p>{link.title}</p>  
+              <p>{form.title}</p>  
             )
           }
         </div>
@@ -147,7 +154,7 @@ export default function ContentLink({ link, setLinks, getLinks }) {
                 handleBlur={handleSubmit}
               />
             ) : (
-              <p>{link.destination}</p>
+              <p>{form.destination}</p>
             )
           }
         </div>

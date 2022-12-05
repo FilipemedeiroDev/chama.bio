@@ -1,23 +1,26 @@
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { ProfileProvider } from '../contexts/ProfileContext';
 import { ToastContainer } from "react-toastify";
 
 function MyApp({ Component, pageProps }) {
   
   return (
     <>
-    <Component {...pageProps} />   
-    <ToastContainer 
-       position="top-center"
-       autoClose={8000}
-       hideProgressBar={false}
-       newestOnTop={false}
-       draggable={false}
-       pauseOnVisibilityChange
-       closeOnClick
-       pauseOnHover
-    /> 
+      <ProfileProvider>
+        <Component {...pageProps} />   
+      </ProfileProvider>
+      <ToastContainer 
+        position="top-center"
+        autoClose={8000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        draggable={false}
+        pauseOnVisibilityChange
+        closeOnClick
+        pauseOnHover
+      /> 
     </>
   ) 
 }

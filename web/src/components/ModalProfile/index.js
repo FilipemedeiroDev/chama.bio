@@ -1,17 +1,19 @@
 import styles from './ModalProfile.module.css';
 import { useEffect, useState, useRef}  from 'react';
 import { toast } from 'react-toastify';
+import useProfile	 from '../../Hooks/useProfile';
 
 import Image from 'next/image';
 import Button from '../Button';
 
-import api from '../../services/api';
+import api  from '../../services/api'
 
 import BlankImageProfile from '../../assets/blank-image-profile.png';
 import { FaTimes } from 'react-icons/fa';
 
 export default function ModalProfile({ setShowModalProfile }) {
-  const [profile, setProfile] = useState({})
+  const { profile, getProfile, addAvatarUrl } = useProfile();
+  
   const [text, setText] = useState('');
   const [form, setForm] = useState({
     description: '',
@@ -46,13 +48,8 @@ export default function ModalProfile({ setShowModalProfile }) {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         })
-    
-        setProfile(prev => {
-          return {
-            ...prev,
-            avatarUrl: data.avatarUrl
-          }
-        })
+        
+        addAvatarUrl(data.avatarUrl)
       } catch (error) {
         console.log(error.message)
       }
@@ -92,29 +89,9 @@ export default function ModalProfile({ setShowModalProfile }) {
         }
     }
 
-    const getProfile = async () =>{
-      try {
-        const response = await api.get('/profiles/me')
-        const profile = response.data;
-        setProfile(profile)
-        setForm(prev => {
-          return {
-            ...prev,
-            background_color: profile.background_color,
-            background_button_color: profile.background_button_color,
-            text_color: profile.text_color,
-            description: profile.description,
-            button_text_color: profile.button_text_color
-          }
-        })      
-      } catch (error) {
-        console.log(error.message)
-        return
-      }
-    }
 
   useEffect(()=>{
-    getProfile()
+    getProfile(setForm)
   },[])
 
   return (

@@ -62,7 +62,7 @@ class ProfileController {
       const { data: PublicUrl, error: errorPublicUrl } = supabase
       .storage
       .from(process.env.SUPABASE_BUCKET)
-      .getPublicUrl(`${username}/${name}?t=${new Date().toISOString()}`, {
+      .getPublicUrl(`${username}/${name}`, {
 
       })
 

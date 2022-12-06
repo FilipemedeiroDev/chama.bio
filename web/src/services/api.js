@@ -3,7 +3,7 @@ import axios from 'axios';
 import { getItem } from '../utils/cookies';
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3001',
+    baseURL: 'https://serverchama-bio.onrender.com',
     timeout: 10000,
     headers: { 'Content-Type': 'application/json' }
 });

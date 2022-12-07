@@ -26,7 +26,7 @@ export default function Home() {
           <Button 
             text='Criar novo link +'
             style={{
-              width: '350px',
+              maxWidth: '350px',
               height: '50px'
             }}
             handle={() => setShowFormNewLink(true)}

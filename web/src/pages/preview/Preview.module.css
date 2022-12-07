@@ -1,7 +1,12 @@
 .container {
+}
+
+.content {
+  padding: 1rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-flow: column;
+  align-items: center;  
+  justify-content: center;
 }
 
 .wrapper {

@@ -1,6 +1,6 @@
 import styles from './Preview.module.css';
-import { useState } from 'react';
-import  Link  from 'next/link';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
@@ -8,44 +8,51 @@ import ModalProfile from '../../components/ModalProfile';
 
 
 export default function Preview({ cookies }) {
-    const [showModalProfile, setShowModalProfile] = useState(false);
-    
-    const previewUrl = `${process.env.NEXT_PUBLIC_APP_HOST}/${cookies.username}`
+  const [showModalProfile, setShowModalProfile] = useState(false);
 
-    return (
-      <div className={styles.container}>
-        <Header 
-          page='preview'
-        />
-        <Button 
+  const previewUrl = `${process.env.NEXT_PUBLIC_APP_HOST}/${cookies.username}`
+
+  useEffect(() => {
+    // Quando o showModalProfile mudar e for verdadeiro, deve colocar o overflow: hidden no body, e quando for falso, colocar overflow: auto
+    const overflow = showModalProfile ? 'hidden' : 'auto';
+  }, [showModalProfile]);
+
+  return (
+    <div className={styles.container}>
+      <Header
+        page='preview'
+      />
+      <div className={styles.content}>
+        <Button
           text='Editar página'
           style={{
-            width: '350px',
+            maxWidth: '350px',
             marginTop: '120px'
           }}
           handle={() => setShowModalProfile(true)}
         />
-        <Link href={previewUrl} style={{ marginTop: '20px'}} target='_blank'>Ir para a página</Link>
-        {showModalProfile && <ModalProfile setShowModalProfile={setShowModalProfile}/>}
-          <div className={styles.wrapper}>
-            <div className={styles.screen}>
-              <iframe 
+        <Link href={previewUrl} style={{ marginTop: '20px' }} target='_blank'>Ir para a página</Link>
+        {showModalProfile && <ModalProfile setShowModalProfile={setShowModalProfile} />}
+        <div className={styles.wrapper}>
+          <div className={styles.screen}>
+            <iframe
               className={styles.iframe}
-              src={previewUrl} 
+              src={previewUrl}
               frameborder='0'
-              
-              >
-              </iframe>  
-            </div>
+
+            >
+            </iframe>
           </div>
-      </div> 
-    )
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export async function getServerSideProps(ctx) {
   const { cookies } = ctx.req
-  
-  if(!cookies.token) {
+
+  if (!cookies.token) {
     return {
       redirect: {
         destination: '/sign-in',
@@ -53,6 +60,6 @@ export async function getServerSideProps(ctx) {
       }
     }
   }
-  
+
   return { props: { cookies } }
 }

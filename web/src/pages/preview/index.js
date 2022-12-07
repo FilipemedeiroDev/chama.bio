@@ -10,6 +10,8 @@ import ModalProfile from '../../components/ModalProfile';
 export default function Preview({ cookies }) {
     const [showModalProfile, setShowModalProfile] = useState(false);
     
+    const previewUrl = `${process.env.NEXT_PUBLIC_APP_HOST}/${cookies.username}`
+
     return (
       <div className={styles.container}>
         <Header 
@@ -23,13 +25,13 @@ export default function Preview({ cookies }) {
           }}
           handle={() => setShowModalProfile(true)}
         />
-        <Link href={`https://agregador-de-links-2w6hsraxu-filipemedeirodev.vercel.app/${cookies.username}`} style={{ marginTop: '20px'}} target='_blank'>Ir para a página</Link>
+        <Link href={previewUrl} style={{ marginTop: '20px'}} target='_blank'>Ir para a página</Link>
         {showModalProfile && <ModalProfile setShowModalProfile={setShowModalProfile}/>}
           <div className={styles.wrapper}>
             <div className={styles.screen}>
               <iframe 
               className={styles.iframe}
-              src={`https://agregador-de-links-2w6hsraxu-filipemedeirodev.vercel.app/${cookies.username}`} 
+              src={previewUrl} 
               frameborder='0'
               
               >

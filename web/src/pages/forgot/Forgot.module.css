@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
 }
 
 .content {
@@ -12,11 +12,17 @@
   flex-direction: column;
 
   width: 350px;
+  margin-top: 40px;
+}
+
+.content span {
+  text-align: center;
 }
 
 .title {
   margin-bottom: 10px;
   font-size: 24px;
+  text-align: center;
 }
 
 .inputContent {
@@ -32,8 +38,11 @@
   margin-top: 20px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 468px) {
   .container {
-    padding: 110% 68%;
+    padding: 1rem;
+  }
+  .content {
+    width: 100%;
   }
 }

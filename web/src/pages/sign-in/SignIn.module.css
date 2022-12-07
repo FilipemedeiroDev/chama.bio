@@ -3,12 +3,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 }
 
 .content {
   width: 450px;
+
+  margin-top: 40px;
 }
 
 .content h1 {
@@ -53,15 +55,20 @@
   margin-top: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 468px) {
   .container {
-    padding: 110% 68%;
+    padding: 1rem;
+  }
+
+  .content {
+    margin-top: 50px;
+    width: 100%;
   }
 }
 
-@media (max-width: 1366px) {
+@media (min-width: 1366px) {
   .content {
-    margin-top: 90px;
+    margin-top: 50px;
   }
   .content h1 {
     margin-bottom: 10px;

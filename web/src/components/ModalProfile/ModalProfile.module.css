@@ -6,7 +6,6 @@
 
   background-color: rgba(0, 0, 0, 0.574);
   width: 100%;
- 
 
   position: fixed;
   top: 0;
@@ -31,8 +30,8 @@
 
 .closeModal {
   position: absolute;
-  top: -40px;
-  right: -40px;
+  top: 8px;
+  right: 8px;
 
   cursor: pointer;
 }
@@ -51,6 +50,7 @@
   border-bottom: 1px solid var(--gray);
   padding-bottom: 30px;
   gap: 10px;
+  width: 100%;
 }
 
 .avatar {
@@ -119,23 +119,15 @@
   margin-top: 16px;
 }
 
-@media screen and (max-width: 768px) {
-  .container {
-    padding-top: 130px;
-  }
-
+@media screen and (max-width: 414px) {
   .content {
-    width: 350px;
+    width: 100%;
     justify-content: center;
-    padding: 24px;
-  }
-
-  .closeModal {
-    top: -50px;
-    right: 0px;
+    padding: 1rem;
   }
 
   .contentUpload {
+    flex-direction: column;
     margin-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 10px;
@@ -155,6 +147,6 @@
 
 @media (max-height: 768px) {
   .container {
-    padding-top: 120px;
+    padding-top: 70px;
   }
 }

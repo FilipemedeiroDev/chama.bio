@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
 }
 
 .content {
@@ -40,8 +40,8 @@
   right: 10px;
 }
 
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 110% 68%;
+@media screen and (max-width: 468px) {
+  .content {
+    width: 100%;
   }
 }

@@ -12,10 +12,10 @@ export default function Preview({ cookies }) {
 
   const previewUrl = `${process.env.NEXT_PUBLIC_APP_HOST}/${cookies.username}`
 
-  useEffect(() => {
-    // Quando o showModalProfile mudar e for verdadeiro, deve colocar o overflow: hidden no body, e quando for falso, colocar overflow: auto
-    const overflow = showModalProfile ? 'hidden' : 'auto';
-  }, [showModalProfile]);
+  // useEffect(() => {
+  //   // Quando o showModalProfile mudar e for verdadeiro, deve colocar o overflow: hidden no body, e quando for falso, colocar overflow: auto
+  //   const overflow = showModalProfile ? 'hidden' : 'auto';
+  // }, [showModalProfile]);
 
   return (
     <div className={styles.container}>

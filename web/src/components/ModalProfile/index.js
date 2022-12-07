@@ -100,8 +100,8 @@ export default function ModalProfile({ setShowModalProfile }) {
           <div className={styles.content}>
             <div className={styles.closeModal}>
               <FaTimes 
-                color='white'
-                fontSize={'30px'}
+                color='black'
+                fontSize={'24px'}
                 onClick={handleCloseModal}
               />
             </div>

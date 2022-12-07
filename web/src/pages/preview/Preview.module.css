@@ -1,11 +1,8 @@
-.container {
-}
-
 .content {
   padding: 1rem;
   display: flex;
   flex-flow: column;
-  align-items: center;  
+  align-items: center;
   justify-content: center;
 }
 

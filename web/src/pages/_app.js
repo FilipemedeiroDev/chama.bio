@@ -4,8 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ProfileProvider } from '../contexts/ProfileContext';
 import { ToastContainer } from "react-toastify";
 
-function MyApp({ Component, pageProps }) {
-  
+function MyApp({ Component, pageProps}) {
   return (
     <>
       <ProfileProvider>
@@ -27,4 +26,5 @@ function MyApp({ Component, pageProps }) {
 
 
 export default MyApp
+
 

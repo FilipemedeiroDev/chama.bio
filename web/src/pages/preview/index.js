@@ -1,22 +1,16 @@
 import styles from './Preview.module.css';
-import { useEffect, useState } from 'react';
+import { useState} from 'react';
 import Link from 'next/link';
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import ModalProfile from '../../components/ModalProfile';
 
-
 export default function Preview({ cookies }) {
   const [showModalProfile, setShowModalProfile] = useState(false);
-
-  const previewUrl = `${process.env.NEXT_PUBLIC_APP_HOST}/${cookies.username}`
-
-  // useEffect(() => {
-  //   // Quando o showModalProfile mudar e for verdadeiro, deve colocar o overflow: hidden no body, e quando for falso, colocar overflow: auto
-  //   const overflow = showModalProfile ? 'hidden' : 'auto';
-  // }, [showModalProfile]);
-
+  
+  const previewUrl = `${process.env.NEXT_PUBLIC_APP_HOST}/${cookies.username}`;
+  
   return (
     <div className={styles.container}>
       <Header
@@ -39,9 +33,9 @@ export default function Preview({ cookies }) {
               className={styles.iframe}
               src={previewUrl}
               frameborder='0'
-
-            >
-            </iframe>
+              id="iframe"
+              >
+            </iframe>  
           </div>
         </div>
       </div>

@@ -33,11 +33,9 @@ export default function Home() {
           />
           {
             showFormNewLink &&
-            <div className={styles.contentFormLink}>
-              <FormLink 
-                setShowFormNewLink={setShowFormNewLink}
-              />
-            </div>
+            <FormLink 
+              setShowFormNewLink={setShowFormNewLink}
+            />
           }
           <div className={styles.contentH2}>
             <h2 className={styles.h2}>Meus Links</h2>

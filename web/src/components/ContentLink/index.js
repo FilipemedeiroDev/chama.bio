@@ -36,7 +36,7 @@ export default function ContentLink({ link }) {
 
   function toggleIsDestinationEditable() {
     const newValue = !isDestinationEditable
-    setIsDestinationEditable(isDestinationEditable)
+    setIsDestinationEditable(newValue)
 
     if (newValue) {
       setForm(prev => ({

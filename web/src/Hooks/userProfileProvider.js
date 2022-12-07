@@ -31,7 +31,7 @@ function useProfileProvider() {
             description: profile.description,
             button_text_color: profile.button_text_color
           }
-        })      
+        })
       } catch (error) {
         console.log(error.message)
         return

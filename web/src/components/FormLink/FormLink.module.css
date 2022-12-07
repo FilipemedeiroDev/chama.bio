@@ -1,9 +1,7 @@
 .contentFormLink {
   display: flex;
   flex-direction: column;
-
-  width: 450px;
-
+  max-width: 350px;
   padding: 16px;
   margin-top: 30px;
   border-radius: 10px;
@@ -64,10 +62,4 @@
 .button:hover {
   opacity: 0.9;
   transform: scale(1.01);
-}
-
-@media screen and (max-width: 768px) {
-  .contentFormLink {
-    width: 350px;
-  }
 }

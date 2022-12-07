@@ -4,10 +4,12 @@
   align-items: center;
   width: 100%;
   margin-top: 100px;
+  padding: 1rem;
 }
 
 .contentH2 {
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
   text-align: center;
 }
 

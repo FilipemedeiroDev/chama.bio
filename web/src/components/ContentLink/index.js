@@ -21,6 +21,30 @@ export default function ContentLink({ link }) {
     title: link.title,
     destination: link.destination
   })
+
+  function toggleIsTitleEditable() {
+    const newValue = !isTitleEditable
+    setIsTitleEditable(newValue)
+
+    if (newValue) {
+      setForm(prev => ({
+        ...prev,
+        title: link.title
+      }))
+    }
+  }
+
+  function toggleIsDestinationEditable() {
+    const newValue = !isDestinationEditable
+    setIsDestinationEditable(isDestinationEditable)
+
+    if (newValue) {
+      setForm(prev => ({
+        ...prev,
+        destination: link.destination
+      }))
+    }
+  }
   
   function copyLink() {
     const linkToCopy = link.destination
@@ -56,14 +80,17 @@ export default function ContentLink({ link }) {
     }
 
     try {
-      await api.patch(`/links/${link._id}/title`, {
-        title: form.title
-      })
-  
+      const promises = Promise.all([
+        api.patch(`/links/${link._id}/title`, {
+          title: form.title
+        }),
+        api.patch(`/links/${link._id}/destination`, {
+          destination: form.destination
+        })
+      ])
 
-      await api.patch(`/links/${link._id}/destination`, {
-        destination: form.destination
-      })
+      await promises;
+
       updateLink({
         ...link,
         title: form.title,
@@ -89,7 +116,7 @@ export default function ContentLink({ link }) {
                     cursor: 'pointer',
                     marginLeft: '6px'
                   }}
-                  onClick={() => setIsTitleEditable(!isTitleEditable)}
+                  onClick={toggleIsTitleEditable}
                 />
               ) : (
                 <GiCancel 
@@ -97,7 +124,7 @@ export default function ContentLink({ link }) {
                   cursor: 'pointer',
                   marginLeft: '6px'
                 }}
-                onClick={() => setIsTitleEditable(!isTitleEditable)}
+                onClick={toggleIsTitleEditable}
                 />
               )
             }  
@@ -114,7 +141,7 @@ export default function ContentLink({ link }) {
                 handleBlur={handleSubmit}
               />
             ) : (
-              <p>{form.title}</p>  
+              <p>{link.title}</p>  
             )
           }
         </div>
@@ -129,7 +156,7 @@ export default function ContentLink({ link }) {
                     cursor: 'pointer',
                     marginLeft: '6px'
                   }}
-                  onClick={() => setIsDestinationEditable(!isDestinationEditable)}
+                  onClick={toggleIsDestinationEditable}
                 />
               ) : (
                 <GiCancel 
@@ -137,7 +164,7 @@ export default function ContentLink({ link }) {
                     cursor: 'pointer',
                     marginLeft: '6px'
                   }}
-                  onClick={() => setIsDestinationEditable(!isDestinationEditable)}
+                  onClick={toggleIsDestinationEditable}
                 />
               )
             }  
@@ -154,7 +181,7 @@ export default function ContentLink({ link }) {
                 handleBlur={handleSubmit}
               />
             ) : (
-              <p>{form.destination}</p>
+              <p>{link.destination}</p>
             )
           }
         </div>

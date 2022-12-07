@@ -16,7 +16,6 @@ function useProfileProvider() {
         return
       }
     }
-
     
     const getProfile = async (setForm) =>{
       try {
@@ -38,21 +37,19 @@ function useProfileProvider() {
         return
       }
     }
-
     
     const updateLink = (link) => {
       const newLinks = [...links]
-      const foundIndex = newLinks.findIndex((item) => item.id === link._id)
+      const foundIndex = newLinks.findIndex((item) => item._id === link._id)
       if (foundIndex >= 0) {
-            const newLink = {
-                  ...newLinks[foundIndex],
-                  ...link
-            }
+        const newLink = {
+          ...newLinks[foundIndex],
+          ...link
+        }
 
-            newLinks[foundIndex] = newLink
-            setLinks(newLinks)
+        newLinks[foundIndex] = newLink
+        setLinks(newLinks)
       }
-      console.log(link)
     }
 
     const deleteLink = (linkId) => {

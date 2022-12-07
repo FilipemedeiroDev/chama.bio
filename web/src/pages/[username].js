@@ -8,7 +8,7 @@ import Button from '../components/Button';
 
 import BlankImageProfile from '../assets/blank-image-profile.png'
 
-import { BsFillShareFill } from 'react-icons/Bs'
+import { BsFillShareFill } from 'react-icons/bs'
 
 export default function Username({ user }) {
 

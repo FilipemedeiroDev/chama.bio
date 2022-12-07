@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { BsFillArrowRightSquareFill } from "react-icons/Bs";
+import { BsFillArrowRightSquareFill } from "react-icons/bs";
 
 import { removeItem } from '../../utils/cookies';
 

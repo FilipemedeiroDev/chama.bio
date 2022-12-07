@@ -6,10 +6,10 @@ import api from '../../services/api';
 
 import Input from '../Input';
 
-import { RiDeleteBin5Line } from "react-icons/Ri";
-import { MdEdit } from 'react-icons/Md';
-import { GiCancel } from 'react-icons/Gi';
-import { MdOutlineContentCopy } from 'react-icons/Md'
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { MdEdit } from 'react-icons/md';
+import { GiCancel } from 'react-icons/gi';
+import { MdOutlineContentCopy } from 'react-icons/md'
 import useProfile from '../../Hooks/useProfile';
 
 

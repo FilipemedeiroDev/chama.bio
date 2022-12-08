@@ -59,7 +59,7 @@ export default function Forgot() {
                   placeholder='Digite seu email'
                   name='email'
                   value={form.email}
-                  handleChangeInput={handleChangeInput}
+                  handle={handleChangeInput}
               />
               { errorEmail && <span>Insira o e-mail cadastrado</span >} 
             </div>

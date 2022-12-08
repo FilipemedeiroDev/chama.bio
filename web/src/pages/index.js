@@ -9,12 +9,13 @@ import FormLink from '../components/FormLink';
 import ContentLink from '../components/ContentLink';
 
 export default function Home() {
-  const { links, getLinks } =  useProfile()
+  const { links, getLinks, setIsLoadingSignIn } =  useProfile()
   const [showFormNewLink, setShowFormNewLink] = useState(false);
 
 
   useEffect(() => {
     getLinks()
+    setIsLoadingSignIn(false)
   },[])
 
   return (
@@ -58,13 +59,13 @@ export async function getServerSideProps(ctx) {
   const { cookies } = ctx.req
     
     if(!cookies.token) {
-      return {
-        redirect: {
-          destination: '/sign-in',
-          permanent: false
+        return {
+          redirect: {
+            destination: '/sign-in',
+            permanent: false
+          }
         }
       }
-    }
-    
+      
     return { props: {} }
 }

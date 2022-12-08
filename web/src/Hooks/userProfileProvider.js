@@ -1,12 +1,15 @@
 import { useState} from "react";
 import { toast } from 'react-toastify'
 import api from '../services/api';
+import { useRouter } from "next/router"; 
 
 function useProfileProvider() {
     const [links, setLinks] = useState([]);
     const [profile, setProfile] = useState({})
-    const [isLoadingSign, setIsLoadingSign] = useState(false);
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingSignIn, setIsLoadingSignIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const router = useRouter()
 
     const getLinks = async () => {
       try {
@@ -14,8 +17,12 @@ function useProfileProvider() {
         setLinks(response.data)
         
       } catch (error) {
-        toast.error(error.message)
-        return
+        console.log(error.message)
+        if(error.response.data.message === 'jwt expired'){
+          router.push('/sign-in')
+          toast.error('sessão expirada, faça o login novamente!')
+          return
+        }
       }
     }
     
@@ -82,8 +89,8 @@ function useProfileProvider() {
       deleteLink,
       addLink,
       addAvatarUrl,
-      isLoadingSign,
-      setIsLoadingSign,
+      isLoadingSignIn,
+      setIsLoadingSignIn,
       isLoading,
       setIsLoading
     }

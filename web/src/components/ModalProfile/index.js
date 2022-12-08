@@ -5,6 +5,7 @@ import useProfile	 from '../../Hooks/useProfile';
 
 import Image from 'next/image';
 import Button from '../Button';
+import Loading from '../../components/Loading';
 
 import api  from '../../services/api'
 
@@ -12,31 +13,32 @@ import BlankImageProfile from '../../assets/blank-image-profile.png';
 import { FaTimes } from 'react-icons/fa';
 
 export default function ModalProfile({ setShowModalProfile }) {
-  const { profile, getProfile, addAvatarUrl, setProfile} = useProfile();
- 
-  const [text, setText] = useState('');
-  const [form, setForm] = useState({
-    description: '',
-    background_color: '',
-    background_button_color: '',
-    text_color:'',
-    button_text_color: ''
-  })
+    const { profile, getProfile, addAvatarUrl, setIsLoadingSignIn} = useProfile();
   
-  const length = 150 - text.length
+    const [text, setText] = useState('');
+    const [form, setForm] = useState({
+      description: '',
+      background_color: '',
+      background_button_color: '',
+      text_color:'',
+      button_text_color: ''
+    })
+      
+    const length = 150 - text.length
 
-  const inputFileRef = useRef(null);
+    const inputFileRef = useRef(null);
 
     function handleCloseModal(){
       setShowModalProfile(false)
     }
 
-    async function reloadFrame() {
+    function reloadFrame() {
       document.getElementById('iframe').src = document.getElementById('iframe').src;
     }
-   function handleChangeInput(e) {
-    setForm({...form, [e.target.name]: e.target.value})
-   }
+
+    function handleChangeInput(e) {
+      setForm({...form, [e.target.name]: e.target.value})
+    }
 
     async function handleUpload(e) {
       e.preventDefault();
@@ -59,7 +61,8 @@ export default function ModalProfile({ setShowModalProfile }) {
     }
 
     async function handleSubmit(e) {
-      e.preventDefault()
+        e.preventDefault()
+        setIsLoadingSignIn(true)
       
         if(!form.background_color) {
           form.background_color = profile.background_color
@@ -86,6 +89,7 @@ export default function ModalProfile({ setShowModalProfile }) {
           
           setForm({...prev => data})
           setShowModalProfile(false)
+          setIsLoadingSignIn(false)
           reloadFrame()
         } catch (error) {
           toast.error(error.message)
@@ -221,7 +225,9 @@ export default function ModalProfile({ setShowModalProfile }) {
                   style={{
                     height: '40px'
                   }}
-                />
+                >
+                  <Loading />
+                </Button>
               </div>
            </div>
           </div>

@@ -44,6 +44,7 @@ export default function SignIn() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    
 
     setIsLoadingSignIn(true)
 
@@ -73,11 +74,10 @@ export default function SignIn() {
       router.push('/')
       
     } catch (error) {
-      console.log(error)
-       toast.error(error.response.data.message)
-       setIsLoadingSignIn(false)
-       return
-    }
+      setIsLoadingSignIn(false)
+      toast.error(error.response.data?.message)
+      return
+    } 
   }
 
   return (

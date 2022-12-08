@@ -8,9 +8,12 @@ import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { removeItem } from '../../utils/cookies';
 
 import Link from 'next/link';
+import useProfile from '../../Hooks/useProfile';
 
 export default function Header({ page }) {
   const [sidebar, setSidebar] = useState(false);
+
+  const {setProfile, setLinks} = useProfile()
 
   const router = useRouter();
 
@@ -26,6 +29,10 @@ export default function Header({ page }) {
 
   const handleLogout = () => {
     removeItem('token')
+    removeItem('userId')
+    removeItem('username')
+    setProfile({})
+    setLinks([])
     router.push('/sign-in')
   }
 

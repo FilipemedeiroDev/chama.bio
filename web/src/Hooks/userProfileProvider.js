@@ -17,11 +17,12 @@ function useProfileProvider() {
         setLinks(response.data)
         
       } catch (error) {
-        console.log(error.message)
         if(error.response.data.message === 'jwt expired'){
           router.push('/sign-in')
           toast.error('sessão expirada, faça o login novamente!')
           return
+        } else {
+          console.log(error)
         }
       }
     }

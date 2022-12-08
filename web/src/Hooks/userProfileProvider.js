@@ -5,6 +5,8 @@ import api from '../services/api';
 function useProfileProvider() {
     const [links, setLinks] = useState([]);
     const [profile, setProfile] = useState({})
+    const [isLoadingSign, setIsLoadingSign] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
     const getLinks = async () => {
       try {
@@ -79,7 +81,11 @@ function useProfileProvider() {
       updateLink,
       deleteLink,
       addLink,
-      addAvatarUrl
+      addAvatarUrl,
+      isLoadingSign,
+      setIsLoadingSign,
+      isLoading,
+      setIsLoading
     }
 }
 

@@ -13,7 +13,7 @@ import { FaTimes } from 'react-icons/fa';
 
 export default function ModalProfile({ setShowModalProfile }) {
   const { profile, getProfile, addAvatarUrl, setProfile} = useProfile();
-  
+ 
   const [text, setText] = useState('');
   const [form, setForm] = useState({
     description: '',

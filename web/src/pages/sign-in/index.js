@@ -1,6 +1,7 @@
 import styles from './SignIn.module.css'
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import useProfile from '../../Hooks/useProfile';
 
 import api from '../../services/api';
 import { setItem } from '../../utils/cookies';
@@ -15,12 +16,15 @@ import Logo from '../../components/Logo';
 
 import IconEyeOpen from '../../assets/icon-eye-open.png';
 import IconEyeClosed from '../../assets/icon-eye-closed.png';
+import Loading from '../../components/Loading';
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({email: '', password: ''});
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+
+  const { setIsLoadingSign } = useProfile();
 
   const router = useRouter();
   
@@ -40,6 +44,7 @@ export default function SignIn() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoadingSign(true)
 
     try {
       if(!form.email) {
@@ -56,16 +61,21 @@ export default function SignIn() {
         email: form.email.trim(),
         password: form.password.trim()
       })
-
+     
       const { token, user } = response.data;
       setItem('token', token);
       setItem('userId', user.id);
       setItem('username', user.username)
       
       router.push('/')
+      
+      if(response.status === 200) {
+        setIsLoadingSign(false)
+      } 
     } catch (error) {
       console.log(error)
        toast.error(error.response.data.message)
+       setIsLoadingSign(false)
        return
     }
   }
@@ -113,7 +123,9 @@ export default function SignIn() {
           <Button 
             text='Entrar'
             handle={handleSubmit}
-          />
+          >
+            <Loading />
+          </Button>
           <div className={styles.spanLink}>
             <span>Ainda não é cadastrado? <Link href={'/sign-up'}>Clique aqui!</Link></span>
           </div>

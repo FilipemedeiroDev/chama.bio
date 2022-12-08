@@ -1,5 +1,7 @@
 import styles from './Preview.module.css';
+import useProfile from '../../Hooks/useProfile';
 import { useState} from 'react';
+
 import Link from 'next/link';
 
 import Header from '../../components/Header';
@@ -8,7 +10,7 @@ import ModalProfile from '../../components/ModalProfile';
 
 export default function Preview({ cookies }) {
   const [showModalProfile, setShowModalProfile] = useState(false);
-  
+
   const previewUrl = `${process.env.NEXT_PUBLIC_APP_HOST}/${cookies.username}`;
   
   return (
@@ -29,13 +31,13 @@ export default function Preview({ cookies }) {
         {showModalProfile && <ModalProfile setShowModalProfile={setShowModalProfile} />}
         <div className={styles.wrapper}>
           <div className={styles.screen}>
-            <iframe
-              className={styles.iframe}
-              src={previewUrl}
-              frameborder='0'
-              id="iframe"
-              >
-            </iframe>  
+              <iframe
+                className={styles.iframe}
+                src={previewUrl}
+                frameBorder='0'
+                id="iframe"
+                >
+              </iframe>
           </div>
         </div>
       </div>

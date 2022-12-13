@@ -7,14 +7,11 @@
   padding: 1rem;
 }
 
-.contentH2 {
+.divider {
   width: 100%;
   max-width: 350px;
   text-align: center;
-}
-
-.h2 {
-  margin-top: 60px;
+  margin-top: 20px;
   border-top: 1px solid var(--gray);
   padding-top: 10px;
 }

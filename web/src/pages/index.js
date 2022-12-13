@@ -40,8 +40,7 @@ export default function Home() {
               setShowFormNewLink={setShowFormNewLink}
             />
           }
-          <div className={styles.contentH2}>
-            <h2 className={styles.h2}>Meus Links</h2>
+          <div className={styles.divider}>
           </div>
           {
             links.map(link => (

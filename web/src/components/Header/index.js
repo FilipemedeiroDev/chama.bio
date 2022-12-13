@@ -19,11 +19,13 @@ export default function Header({ page }) {
 
   const handleShowSiderbar = () => {
     setSidebar(true)
+    document.body.style.overflow = 'hidden'
   } 
 
   const handleCloseSidebar = () => {
     if (sidebar) {
         setSidebar(false)
+        document.body.style.overflow = ''
     }
   }
 
@@ -43,16 +45,16 @@ export default function Header({ page }) {
       </div>
       <nav className={sidebar ? styles.sideBar : styles.nav}>
         <ul className={styles.ul}>
-          <Link href='/'>
+          <Link href='/' onClick={() => { document.body.style.overflow = '' }}>
             <li className={page === 'home' ? styles.liActive : styles.li}>
-              Links
+              Meus links
             </li>
           </Link>
         </ul>
         <ul className={styles.ul}>
-          <Link href='/preview'>
+          <Link href='/preview' onClick={() => { document.body.style.overflow = '' }}>
             <li className={page === 'preview' ? styles.liActive : styles.li}>
-            preview
+            Personalização
             </li>
           </Link>
         </ul>

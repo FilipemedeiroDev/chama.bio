@@ -51,7 +51,7 @@ export default function ContentLink({ link }) {
 
     window.navigator.clipboard
     .writeText(linkToCopy)
-    .then(toast.success('Destino opiado com sucesso!'))
+    .then(toast.success('Destino copiado com sucesso!'))
   }
 
   function handleChangeInput(e) {

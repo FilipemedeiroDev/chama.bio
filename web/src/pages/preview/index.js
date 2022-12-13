@@ -24,7 +24,10 @@ export default function Preview({ cookies }) {
             maxWidth: '350px',
             marginTop: '120px'
           }}
-          handle={() => setShowModalProfile(true)}
+          handle={() => {
+            setShowModalProfile(true)
+            document.body.style.overflow = 'hidden'
+          }}
         >
           Editar página
         </Button>

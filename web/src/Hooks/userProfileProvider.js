@@ -22,6 +22,7 @@ function useProfileProvider() {
           return
         } else {
           console.log(error)
+          return
         }
       }
     }

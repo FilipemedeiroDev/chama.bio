@@ -30,6 +30,7 @@ export default function ModalProfile({ setShowModalProfile }) {
 
     function handleCloseModal(){
       setShowModalProfile(false)
+      document.body.style.overflow = ''
     }
 
     function reloadFrame() {

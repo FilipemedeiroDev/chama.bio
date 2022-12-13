@@ -5,11 +5,13 @@ import { toast } from 'react-toastify';
 
 import { FaTimes } from 'react-icons/fa';
 
+import Loading from '../Loading';
+
 import api from '../../services/api';
 import useProfile from '../../Hooks/useProfile';
 
 export default function FormLink({ setShowFormNewLink }) {
-  const { addLink } = useProfile()
+  const { addLink, setIsLoading } = useProfile()
   const [errorFormLink, setErrorFormLink] = useState(false)
   const [form, setForm] = useState({
     title: '',
@@ -26,9 +28,11 @@ export default function FormLink({ setShowFormNewLink }) {
   }
 
   async function handleSubmit () {
+    setIsLoading(true) 
 
     if(form.title === '' || form.destination === ''){
       setErrorFormLink(true)
+      setIsLoading(false)
       return
     }
 
@@ -39,8 +43,9 @@ export default function FormLink({ setShowFormNewLink }) {
       })
       addLink(data)
       setShowFormNewLink(false);
-      
+      setIsLoading(false)
     } catch (error) {
+      setIsLoading(false)
       toast.error(error.message)
       return
     }
@@ -80,7 +85,9 @@ export default function FormLink({ setShowFormNewLink }) {
       <Button className={styles.button}
         text='Salvar'
         handle={handleSubmit}
-      />
+      >
+        <Loading />
+      </Button>
   
       {errorFormLink && <span>Preencha todos os campos para criar um novo link</span>}
     </div>

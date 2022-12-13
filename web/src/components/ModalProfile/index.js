@@ -13,7 +13,7 @@ import BlankImageProfile from '../../assets/blank-image-profile.png';
 import { FaTimes } from 'react-icons/fa';
 
 export default function ModalProfile({ setShowModalProfile }) {
-    const { profile, getProfile, addAvatarUrl, setIsLoadingSignIn} = useProfile();
+    const { profile, getProfile, addAvatarUrl, setIsLoading } = useProfile();
   
     const [text, setText] = useState('');
     const [form, setForm] = useState({
@@ -62,7 +62,7 @@ export default function ModalProfile({ setShowModalProfile }) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        setIsLoadingSignIn(true)
+        setIsLoading(true)
       
         if(!form.background_color) {
           form.background_color = profile.background_color
@@ -89,7 +89,7 @@ export default function ModalProfile({ setShowModalProfile }) {
           
           setForm({...prev => data})
           setShowModalProfile(false)
-          setIsLoadingSignIn(false)
+          setIsLoading(false)
           reloadFrame()
         } catch (error) {
           toast.error(error.message)

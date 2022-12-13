@@ -2,19 +2,23 @@ import styles from './Forgot.module.css'
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import useProfile from '../../Hooks/useProfile';
 
 import api from '../../services/api';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Logo from '../../components/Logo';
+import Loading from '../../components/Loading';
 
-import Link from 'next/link'
+import Link from 'next/link';
 
 
 export default function Forgot() {
   const [form, setForm] = useState({email: ''});
   const [errorEmail, setErrorEmail] = useState(false);
+
+  const { setIsLoading } = useProfile();
 
   const router = useRouter();
 
@@ -25,10 +29,12 @@ export default function Forgot() {
 
   async function handleSubmit(e) {
       e.preventDefault();
+      setIsLoading(true)
 
       try {
         if(!form.email) {
           setErrorEmail(true)
+          setIsLoading(false)
           return
         }
         
@@ -39,7 +45,9 @@ export default function Forgot() {
         toast.success('Email enviado com sucesso')
 
         router.push('/sign-in')
+        setIsLoading(false)
       } catch (error) {
+        setIsLoading(false)
         toast.error(error.response.data.message)
         return
       }
@@ -66,7 +74,9 @@ export default function Forgot() {
             <Button 
               text='Enviar email'
               handleSubmit={handleSubmit}
-            />
+            >
+              <Loading />
+            </Button>
           <div className={styles.Link}>
             <Link href={'/sign-in'}>Voltar para o Login</Link>
           </div> 

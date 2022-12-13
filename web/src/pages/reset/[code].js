@@ -2,6 +2,7 @@ import styles from './Reset.module.css';
 import {  useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import useProfile from '../../Hooks/useProfile';
 
 import api from '../../services/api'
 
@@ -9,7 +10,7 @@ import Image from 'next/image';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-
+import Loading from '../../components/Loading';
 
 import IconEyeOpen from '../../assets/icon-eye-open.png';
 import IconEyeClosed from '../../assets/icon-eye-closed.png';
@@ -18,6 +19,8 @@ export default function Reset() {
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({newPassword: ''});
   const [errorPassword, setErrorPassword] = useState(false);
+
+  const { setIsLoading } = useProfile();
 
   const router = useRouter();
   const { code } =  router.query
@@ -34,16 +37,19 @@ export default function Reset() {
   
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true)
    
     try {
   
       if(form.newPassword === '') {
        setErrorPassword(true)
+       setIsLoading(false)
        return
       }
 
       if(form.newPassword.length < 6){
-        alert('A senha deve ter no mínimo 6 caracteres')
+        toast.error('A senha deve ter no mínimo 6 caracteres')
+        setIsLoading(false)
         return
       }
       await api.post(`/users/reset/${code}`, {
@@ -51,7 +57,9 @@ export default function Reset() {
       })
 
       router.push('/sign-in')
+      setIsLoading(false)
     } catch (error) {
+      setIsLoading(false)
       console.log(error)
       toast.error(error.response.data.message)
       router.push('sign-in')
@@ -71,7 +79,7 @@ export default function Reset() {
                 placeholder='*******'
                 name='newPassword'
                 value={form.newPassword}
-                handleChangeInput={handleChangeInput}
+                handle={handleChangeInput}
               />
               {errorPassword && <span>Insira a nova senha!</span>}
               <Image 
@@ -86,7 +94,9 @@ export default function Reset() {
           <Button 
             text='Redefinir senha'
             handleSubmit={handleSubmit}
-          />
+          >
+            <Loading />
+          </Button>
         </div>
       </form>
     </div>

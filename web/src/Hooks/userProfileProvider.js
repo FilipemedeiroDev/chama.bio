@@ -6,9 +6,8 @@ import { useRouter } from "next/router";
 function useProfileProvider() {
     const [links, setLinks] = useState([]);
     const [profile, setProfile] = useState({})
-    const [isLoadingSignIn, setIsLoadingSignIn] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
+   
     const router = useRouter()
 
     const getLinks = async () => {
@@ -90,8 +89,6 @@ function useProfileProvider() {
       deleteLink,
       addLink,
       addAvatarUrl,
-      isLoadingSignIn,
-      setIsLoadingSignIn,
       isLoading,
       setIsLoading
     }

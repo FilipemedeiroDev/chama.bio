@@ -1,6 +1,7 @@
 import styles from './SignUp.module.css';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import useProfile from '../../Hooks/useProfile';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +15,7 @@ import Logo from '../../components/Logo';
 
 import IconEyeOpen from '../../assets/icon-eye-open.png';
 import IconEyeClosed from '../../assets/icon-eye-closed.png'
+import Loading from '../../components/Loading';
 
 export default function SignUp() {
   const [form, setForm] =useState({
@@ -26,8 +28,9 @@ export default function SignUp() {
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorUsername, setErrorUsername] = useState(false);
-
   const [showPassword, setShowPassword] = useState(false);
+
+  const { setIsLoading } = useProfile();
 
   const route = useRouter();
 
@@ -58,24 +61,29 @@ export default function SignUp() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setIsLoading(true)
 
         if(!form.name) {
           setErrorName(true)
+          setIsLoading(false)
           return
         }
 
         if(!form.email) {
           setErrorEmail(true)
+          setIsLoading(false)
           return
         }
 
         if(!form.password) {
           setErrorPassword(true)
+          setIsLoading(false)
           return
         }
 
         if(!form.username) {
           setErrorUsername(true)
+          setIsLoading(false)
           return
         }
 
@@ -89,7 +97,9 @@ export default function SignUp() {
 
           toast.success(response.data.message)
           route.push('sign-in')
+          setIsLoading(false)
         } catch (error) {
+          setIsLoading(false)
           console.log(error)
           toast.error(error.response.data.message)
           return
@@ -158,7 +168,9 @@ export default function SignUp() {
             <Button 
               text='Cadastrar'
               handle={handleSubmit}
-            />
+            >
+              <Loading />
+            </Button>
             <div className={styles.spanLink}>
               <span>Já é cadastrado? <Link href={'/sign-in'}>Clique aqui!</Link></span>
             </div>

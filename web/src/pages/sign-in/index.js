@@ -24,7 +24,7 @@ export default function SignIn() {
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
 
-  const { setIsLoadingSignIn } = useProfile();
+  const { setIsLoading } = useProfile();
 
   const router = useRouter();
   
@@ -46,18 +46,18 @@ export default function SignIn() {
     e.preventDefault();
     
 
-    setIsLoadingSignIn(true)
+    setIsLoading(true)
 
     try {
       if(!form.email) {
         setErrorEmail(true)
-        setIsLoadingSignIn(false)
+        setIsLoading(false)
         return
       }
 
       if(!form.password) {
         setErrorPassword(true)
-        setIsLoadingSignIn(false)
+        setIsLoading(false)
         return
       }
 
@@ -74,7 +74,7 @@ export default function SignIn() {
       router.push('/')
       
     } catch (error) {
-      setIsLoadingSignIn(false)
+      setIsLoading(false)
       if(error.response.data.message){
         toast.error(error.response.data.message)
       }else {

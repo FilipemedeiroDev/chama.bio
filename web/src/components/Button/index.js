@@ -2,7 +2,7 @@ import styles from './Button.module.css'
 import useProfile from '../../Hooks/useProfile';
 
 export default function Button({ text, handle, style, ...props}) {
-  const { isLoadingSignIn } = useProfile();
+  const { isLoading } = useProfile();
 
   return (
     <button
@@ -10,7 +10,7 @@ export default function Button({ text, handle, style, ...props}) {
       onClick={handle}
       style={style}
     >
-     { isLoadingSignIn ? props.children : text }  
+     { isLoading ? props.children : text }  
     </button>
   )
 }

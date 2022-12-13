@@ -9,13 +9,13 @@ import FormLink from '../components/FormLink';
 import ContentLink from '../components/ContentLink';
 
 export default function Home() {
-  const { links, getLinks, setIsLoadingSignIn } =  useProfile()
+  const { links, getLinks, setIsLoading } =  useProfile()
   const [showFormNewLink, setShowFormNewLink] = useState(false);
 
 
   useEffect(() => {
     getLinks()
-    setIsLoadingSignIn(false)
+    setIsLoading(false)
   },[])
 
   return (
@@ -31,7 +31,9 @@ export default function Home() {
               height: '50px'
             }}
             handle={() => setShowFormNewLink(true)}
-          />
+          >
+            Criar novo link +
+          </Button>
           {
             showFormNewLink &&
             <FormLink 

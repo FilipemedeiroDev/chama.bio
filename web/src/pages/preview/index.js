@@ -1,5 +1,4 @@
 import styles from './Preview.module.css';
-import useProfile from '../../Hooks/useProfile';
 import { useState} from 'react';
 
 import Link from 'next/link';
@@ -26,7 +25,9 @@ export default function Preview({ cookies }) {
             marginTop: '120px'
           }}
           handle={() => setShowModalProfile(true)}
-        />
+        >
+          Editar página
+        </Button>
         <Link href={previewUrl} style={{ marginTop: '20px' }} target='_blank'>Ir para a página</Link>
         {showModalProfile && <ModalProfile setShowModalProfile={setShowModalProfile} />}
         <div className={styles.wrapper}>

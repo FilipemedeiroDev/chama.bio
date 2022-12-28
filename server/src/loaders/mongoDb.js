@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 
 async function startMongoDb() {
-  mongoose.connect(process.env.DB_URL, {
+  await mongoose.connect(process.env.DB_URL, {
+    dbName: 'test',
     useNewUrlParser: true,
-  }, (err) => {
-    if (err) {
-      console.error(err);
-    }
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 10000
+  }).catch(err => {
+    console.error(err.reason);
   });
 }
 

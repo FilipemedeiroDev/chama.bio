@@ -8,5 +8,7 @@ services:
       network: host
     env_file:
       - ./.env
+    dns:
+      - 8.8.8.8
     ports:
       - 3000:3000

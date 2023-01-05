@@ -117,7 +117,7 @@ class UsersController {
           from: 'medeirolp@gmail.com',
           to: user.email,
           subject: 'Redefinição de Senha',
-          html: `<a href="http://localhost:3000/reset/${generatedToken.code}" target="_blank">Clique aqui para redefinir sua senha</a>`
+          html: `<a href="https://chama.bio/reset/${generatedToken.code}" target="_blank">Clique aqui para redefinir sua senha</a>`
         })
         
         return res.status(201).send();

@@ -12,4 +12,3 @@ export function getItem(key) {
 export function removeItem(key) {
   Cookies.remove(key, {path: '/'});
 }
-

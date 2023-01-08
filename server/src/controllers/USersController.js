@@ -86,7 +86,9 @@ class UsersController {
         return res.status(200).json({
           user: {
             id: user._id,
-            username:  user.username
+            name: user.name,
+            email: user.email,
+            username:  user.username,
           },
           token
         });

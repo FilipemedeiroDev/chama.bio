@@ -1,15 +1,15 @@
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { ProfileProvider } from '../contexts/ProfileContext';
+import { GlobalProvider } from '../contexts/GlobalContext';
 import { ToastContainer } from "react-toastify";
 
 function MyApp({ Component, pageProps}) {
   return (
     <>
-      <ProfileProvider>
+      <GlobalProvider>
         <Component {...pageProps} />   
-      </ProfileProvider>
+      </GlobalProvider>
       <ToastContainer 
         position="top-center"
         autoClose={8000}

@@ -1,7 +1,7 @@
 import styles from './SignIn.module.css'
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import useProfile from '../../Hooks/useProfile';
+import useGlobalContext from '../../Hooks/useGlobalContext';
 
 import api from '../../services/api';
 import { setItem } from '../../utils/cookies';
@@ -24,7 +24,7 @@ export default function SignIn() {
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
 
-  const { setIsLoading } = useProfile();
+  const { setIsLoading } = useGlobalContext();
 
   const router = useRouter();
   
@@ -70,9 +70,10 @@ export default function SignIn() {
       setItem('token', token);
       setItem('userId', user.id);
       setItem('username', user.username)
+      setItem('name', user.name)
       
       router.push('/')
-      
+      setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
       if(error.response.data.message){

@@ -1,12 +1,25 @@
 import withAuth from '../components/withAuth'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
+import { useEffect } from 'react';
+import useGlobalContext from '../Hooks/useGlobalContext';
+
+import Sidebar from '../components/Sidebar';
 
 function Home() {
+  // const { getProfile } = useGlobalContext();
+
+  // useEffect(() => {
+  //   getProfile()
+  // }, [])
+  
 
   return (
-    <div className={styles.container}>
-      <h1>Logado</h1>
-    </div>
+    <>
+      <Sidebar />
+      <main className={styles.main}>   
+      
+      </main>
+    </>
   )
 }
 

@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { GlobalProvider } from '../contexts/GlobalContext';
 import { ToastContainer } from "react-toastify";
 
+
 function MyApp({ Component, pageProps}) {
   return (
     <>

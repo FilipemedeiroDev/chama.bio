@@ -6,7 +6,25 @@ const GlobalContext = createContext({});
 
 export function GlobalProvider({ children }) {
     const [isLoading, setIsLoading] = useState(false);
-    const [profile, setProfile] = useState({})
+    const [profile, setProfile] = useState({});
+    const [links, setLinks] = useState([])
+
+    const getLinks = async () => {
+      try {
+        const response = await api.get('/links')
+        setLinks(response.data)
+        
+      } catch (error) {
+        if(error.response.data.message === 'jwt expired'){
+          router.push('/sign-in')
+          toast.error('sessão expirada, faça o login novamente!')
+          return
+        } else {
+          console.log(error)
+          return
+        }
+      }
+    }
 
     const getProfile = async () => {
         try {
@@ -19,13 +37,35 @@ export function GlobalProvider({ children }) {
         }
       }
 
+      const updateLink = (link) => {
+        const newLinks = [...links]
+        const foundIndex = newLinks.findIndex((item) => item._id === link._id)
+        if (foundIndex >= 0) {
+          const newLink = {
+            ...newLinks[foundIndex],
+            ...link
+          }
+  
+          newLinks[foundIndex] = newLink
+          setLinks(newLinks)
+        }
+      }
+  
+      const deleteLink = (linkId) => {
+        setLinks(prev => prev.filter(links => links._id !== linkId))
+      }
+
     return (
         <GlobalContext.Provider
             value={{
                 isLoading,
                 setIsLoading,
                 getProfile,
-                profile
+                profile,
+                updateLink,
+                deleteLink,
+                getLinks,
+                links
             }}
         >
             {children}

@@ -114,8 +114,9 @@
   height: 100%;
   padding: 30px 10px 30px 10px;
   border-right: 1px solid var(--gray);
-  background: whitesmoke;
+  background: #fff;
   animation: showSidebar 0.6s;
+  z-index: 999;
 }
 
 .sidebarMobile nav {

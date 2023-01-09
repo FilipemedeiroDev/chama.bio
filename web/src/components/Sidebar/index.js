@@ -14,10 +14,11 @@ import {
   AiFillHome as IconHome, 
   AiOutlineMenu as IconMenu, 
   AiOutlineClose as IconClose,
-  AiOutlineLogout as Logout
+  AiOutlineLogout as Logout,
+  AiOutlineLink as IconLink
 } from 'react-icons/ai';
 
-export default function Sidebar() {
+export default function Sidebar({ page }) {
   const { profile, getProfile } = useGlobalContext();
   const [showSidebarMobile, setShowSidebarMobile] = useState(false);
 
@@ -54,19 +55,33 @@ export default function Sidebar() {
         </header>
 
         <nav>
-        <Link href='/'>
+        <Link href={'/'}>
           <button>
-            <span>
+            <span style={{
+            background: page === 'home' && 'whitesmoke'
+            }}>
               <IconHome />
               <span>Home</span>
             </span>
           </button>
         </Link>
-        
+
+        <Link href={'/newLink'}>
+          <button>
+            <span style={{
+            background: page === 'newlink' && 'whitesmoke'
+            }}>
+              <IconLink />
+              <span>Link +</span>
+            </span>
+          </button>
+        </Link>
 
         <Link href='/profile'>
           <button>
-            <span>
+            <span style={{
+            background: page === 'profile' && 'whitesmoke'
+            }}>
               <IconProfile />
               <span>Perfil</span>
             </span>
@@ -75,7 +90,9 @@ export default function Sidebar() {
         
         <Link href='/preview'>
           <button>
-            <span>
+            <span style={{
+            background: page === 'preview' && 'whitesmoke'
+            }}>
               <EyeIcon />
               <span>Preview</span>
             </span>

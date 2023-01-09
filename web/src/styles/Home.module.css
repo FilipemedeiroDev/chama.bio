@@ -1,12 +1,79 @@
 .main {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 
-  margin-left: 250px;
-  margin-right: 6px;
-  margin-top: 60px;
+  max-width: 920px;
+  padding: 1rem;
+
+  margin-left: 280px;
+  margin-right: 10px;
+  margin-top: 20px;
   overflow: hidden;
+}
+
+.main h1 {
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.main span {
+  font-weight: 700;
+  color: var(--green)
+}
+
+.contentShareLink {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+  max-width: 550px;
+}
+
+.shareLink {
+    display: flex;
+    cursor: pointer;
+    padding-left: 20px;
+    border-radius: 20px;
+    align-items: center;
+    mix-blend-mode: screen;
+    background-color: whitesmoke;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.url {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.shareLink button {
+    height: 100%;
+    display: flex;
+    color: white;
+    font-size: 12px;
+    line-height: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background: var(--green);
+    cursor: pointer;
+}
+
+.myLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 550px;
+  position: relative;
+  margin-top: 20px;
 }
 
 @media (width < 920px) {
@@ -14,14 +81,22 @@
     transition: margin 0.6s;
     margin-left: 78px;
   }
+
+  .myLink {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
   .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 40px 6px 0 6px;
+    align-items: flex-start;
+    margin-left: 20px;
+  }
+  .contentShareLink {
+    width: 100%;
+  }
+
+  .myLink {
+    width: 100%;
   }
 }

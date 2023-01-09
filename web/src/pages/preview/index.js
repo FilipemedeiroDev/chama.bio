@@ -1,13 +1,18 @@
 import Sidebar from '../../components/Sidebar';
+import withAuth from '../../components/withAuth';
 import styles from './Preview.module.css';
 
-export default function Preview() {
+function Preview() {
     return (
     <>
-      <Sidebar />
+      <Sidebar 
+        page='preview'
+      />
       <div className={styles.main}>
         <h1>Preview</h1>
       </div>
     </>
   )
 }
+
+ export default withAuth(Preview)

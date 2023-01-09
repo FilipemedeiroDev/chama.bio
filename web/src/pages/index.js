@@ -6,21 +6,17 @@ import useGlobalContext from '../Hooks/useGlobalContext';
 import Sidebar from '../components/Sidebar';
 
 function Home() {
-  // const { getProfile } = useGlobalContext();
-
-  // useEffect(() => {
-  //   getProfile()
-  // }, [])
+ 
   
 
   return (
     <>
       <Sidebar />
       <main className={styles.main}>   
-      
+
       </main>
     </>
   )
 }
 
-export default withAuth(Home)
+export default withAuth(Home);

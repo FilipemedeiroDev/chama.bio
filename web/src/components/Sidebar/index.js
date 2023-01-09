@@ -54,26 +54,33 @@ export default function Sidebar() {
         </header>
 
         <nav>
+        <Link href='/'>
           <button>
             <span>
               <IconHome />
               <span>Home</span>
             </span>
           </button>
-  
+        </Link>
+        
+
+        <Link href='/profile'>
           <button>
             <span>
               <IconProfile />
               <span>Perfil</span>
             </span>
           </button>
-
+        </Link>
+        
+        <Link href='/preview'>
           <button>
             <span>
               <EyeIcon />
               <span>Preview</span>
             </span>
           </button>
+        </Link>
 
           <button 
             onClick={handleLogout}

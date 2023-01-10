@@ -12,6 +12,7 @@ import { BsFillShareFill } from 'react-icons/bs'
 
 export default function Username({ user }) {
 
+  
   async function share() {
     let shareData = {
       url: window.location.href
@@ -50,11 +51,6 @@ export default function Username({ user }) {
           onClick={share}
         />
       </div>
-      <h2
-      style={{
-        color: user.profile.text_color
-      }}
-      >{user.name}</h2>
       <div 
         className={styles.description}
         style={{

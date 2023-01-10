@@ -59,6 +59,15 @@ export function GlobalProvider({ children }) {
         setLinks(prev => prev.filter(links => links._id !== linkId))
       }
 
+      const addAvatarUrl = (newAvatarUrl) => {
+        setProfile(prev => {
+          return {
+            ...prev,
+            avatarUrl: newAvatarUrl
+          }
+        })
+      }
+
     return (
         <GlobalContext.Provider
             value={{
@@ -70,7 +79,8 @@ export function GlobalProvider({ children }) {
                 deleteLink,
                 getLinks,
                 links,
-                addLink
+                addLink,
+                addAvatarUrl
             }}
         >
             {children}

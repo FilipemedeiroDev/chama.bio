@@ -2,9 +2,10 @@ import styles from './NewLink.module.css';
 import { useState  } from 'react';
 import { toast } from 'react-toastify';
 import withAuth from '../../components/withAuth';
+import useGlobalContext from '../../Hooks/useGlobalContext';
 
 import Sidebar from '../../components/Sidebar';
-import useGlobalContext from '../../Hooks/useGlobalContext';
+import Input from '../../components/Input';
 
 import api from '../../services/api';
 
@@ -58,7 +59,7 @@ function NewLink() {
             <h2>Criar um novo link +</h2>  
             <div className={styles.contentInput}>
                 <label>Título:</label>
-                <input 
+                <Input 
                     type='text' 
                     placeholder='Crie um nome para o seu link...' 
                     name='title'
@@ -67,7 +68,7 @@ function NewLink() {
             </div>
             <div className={styles.contentInput}>
                 <label>Destino:</label>
-                <input 
+                <Input 
                     type='text' 
                     placeholder='Digite ou cole aqui sua url...' 
                     name='destination'

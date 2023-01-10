@@ -136,6 +136,8 @@ export default function ContentLink({ link }) {
                 name='title'
                 style={{
                   height: '12px',
+                  border: '1px solid gray',
+                  background: 'white'
                 }}
                 handle={handleChangeInput}
                 handleBlur={handleSubmit}
@@ -176,6 +178,8 @@ export default function ContentLink({ link }) {
                 name='destination'
                 style={{
                   height: '12px',
+                  border: '1px solid gray',
+                  background: 'white'
                 }}
                 handle={handleChangeInput}
                 handleBlur={handleSubmit}

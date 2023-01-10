@@ -8,6 +8,8 @@ import { removeItem } from '../../utils/cookies';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import BlankProfile from '../../assets/blank-image-profile.png';
+
 import { BsPersonFill as IconProfile }  from 'react-icons/bs';
 import { 
   AiOutlineEye as EyeIcon, 
@@ -46,7 +48,7 @@ export default function Sidebar({ page }) {
         <header className={styles.sidebarHeader}>
           <Image 
             className={styles.avatar}
-            src={profile.avatarUrl} 
+            src={profile.avatarUrl ? profile.avatarUrl : BlankProfile} 
             alt='Avatar' 
             width={35}
             height={35}

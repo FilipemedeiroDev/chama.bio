@@ -37,7 +37,7 @@ function Home() {
         page='home'
       />
       <main className={styles.main}>   
-        <h1>Olá, <span>{firstName}!</span></h1>
+        <h2>Olá, <span>{firstName}!</span></h2>
         <div className={styles.contentShareLink}>
           <p>Seu link:</p>
           <div className={styles.shareLink}>

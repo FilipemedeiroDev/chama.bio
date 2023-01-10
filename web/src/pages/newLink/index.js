@@ -1,16 +1,80 @@
 import styles from './NewLink.module.css';
+import { useState  } from 'react';
+import { toast } from 'react-toastify';
 import withAuth from '../../components/withAuth';
 
 import Sidebar from '../../components/Sidebar';
+import useGlobalContext from '../../Hooks/useGlobalContext';
+
+import api from '../../services/api';
 
 function NewLink() {
+    const { addLink, setIsLoading } = useGlobalContext();
+
+    const [form, setForm] = useState({
+        title: '',
+        destination: ''
+      })
+
+    function handleChangeInput(e) {
+        setForm({...form, [e.target.name]: e.target.value})
+    }
+
+    async function handleSubmit () {
+        setIsLoading(true) 
+    
+        if(form.title === '' || form.destination === ''){
+          toast.error('Preencha todos os campo para continuar')
+          setIsLoading(false)
+          return
+        }
+    
+        try { 
+          const { data } = await api.post('/links', {
+            title: form.title.trim(),
+            destination: form.destination.trim()
+          })
+
+          addLink(data)
+          setIsLoading(false)
+          setForm({
+            title: '',
+            destination: ''
+          })
+          toast.success('Link adicionado com sucesso!')
+        } catch (error) {
+          setIsLoading(false)
+          toast.error(error.message)
+          return
+        }
+      }
+
     return (
         <>
         <Sidebar
             page='newlink'
         />
         <div className={styles.main}>
-            <h1>New Link</h1>  
+            <h2>Criar um novo link +</h2>  
+            <div className={styles.contentInput}>
+                <label>Título:</label>
+                <input 
+                    type='text' 
+                    placeholder='Crie um nome para o seu link...' 
+                    name='title'
+                    value={form.title}
+                    onChange={handleChangeInput}/>
+            </div>
+            <div className={styles.contentInput}>
+                <label>Destino:</label>
+                <input 
+                    type='text' 
+                    placeholder='Digite ou cole aqui sua url...' 
+                    name='destination'
+                    value={form.destination}
+                    onChange={handleChangeInput}/>
+            </div>
+            <button onClick={handleSubmit}>Criar</button>
         </div>
      </>
     )

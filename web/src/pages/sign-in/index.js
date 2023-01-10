@@ -90,7 +90,7 @@ export default function SignIn() {
       <Logo />
       <form onSubmit={handleSubmit}>
         <div className={styles.content}>
-          <h1>Faça o Login</h1>
+          <h2>Faça o Login</h2>
           <div className={styles.inputContent}>
             <div>
               <label>E-mail</label>

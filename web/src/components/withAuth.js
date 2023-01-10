@@ -6,7 +6,7 @@ export default function withAuth(Page) {
   const token = getItem('token');
 
   Wrapper.getInitialProps = (ctx) => {
-    console.log(ctx.res)
+  
     if(!token) {
       if (ctx.res) {
         ctx.res.writeHead(302, {
@@ -14,7 +14,7 @@ export default function withAuth(Page) {
         })
         ctx.res.end();
       } else {
-        Router.replace('/sign-in')
+        Router.replace('sign-in')
       }
     }
 

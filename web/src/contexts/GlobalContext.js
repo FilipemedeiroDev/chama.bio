@@ -37,6 +37,10 @@ export function GlobalProvider({ children }) {
         }
       }
 
+      const addLink = (data) => {
+        setLinks(prev => [...prev, data])
+      }
+
       const updateLink = (link) => {
         const newLinks = [...links]
         const foundIndex = newLinks.findIndex((item) => item._id === link._id)
@@ -65,7 +69,8 @@ export function GlobalProvider({ children }) {
                 updateLink,
                 deleteLink,
                 getLinks,
-                links
+                links,
+                addLink
             }}
         >
             {children}

@@ -1,5 +1,5 @@
 .contentLogo {
-  font-size: 24px;
+  font-size: 18px;
   text-align: center;
 }
 
@@ -9,13 +9,12 @@
 
 @media (max-width: 768px) {
   .contentLogo {
-    top: 50px;
-    font-size: 22px;
+    font-size: 18px;
   }
 }
 
 @media (min-width: 1366px) {
   .contentLogo {
-    font-size: 30px;
+    font-size: 18px;
   }
 }

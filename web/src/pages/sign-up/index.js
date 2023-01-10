@@ -111,7 +111,7 @@ export default function SignUp() {
         <Logo />
         <form>
           <div className={styles.content}>
-            <h1>Cadastre-se</h1>
+            <h2>Cadastre-se</h2>
             <div className={styles.inputContent}>
               <div>
                 <label>Nome</label>

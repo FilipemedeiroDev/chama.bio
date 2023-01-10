@@ -1,6 +1,7 @@
 .main {
   display: flex;
   flex-direction: column;
+  
 
   max-width: 920px;
   padding: 1rem;
@@ -32,7 +33,7 @@
 .shareLink {
     display: flex;
     cursor: pointer;
-    padding-left: 20px;
+    padding: 2px 0 2px 20px;
     border-radius: 20px;
     align-items: center;
     mix-blend-mode: screen;
@@ -46,7 +47,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-size: 12px;
+  font-size: 14px;
   text-decoration: underline;
 }
 

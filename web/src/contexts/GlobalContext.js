@@ -7,7 +7,9 @@ const GlobalContext = createContext({});
 export function GlobalProvider({ children }) {
     const [isLoading, setIsLoading] = useState(false);
     const [profile, setProfile] = useState({});
-    const [links, setLinks] = useState([])
+    const [links, setLinks] = useState([]);
+    const [user, setUser ] = useState({})
+    
 
     const getLinks = async () => {
       try {
@@ -23,6 +25,17 @@ export function GlobalProvider({ children }) {
           console.log(error)
           return
         }
+      }
+    }
+
+    const getUser = async () => {
+      try {
+        const response = await api.get('/users/me');
+        const user = response.data;
+        setUser(user)
+      } catch (error) {
+        console.log(error.message)
+        return
       }
     }
 
@@ -80,7 +93,9 @@ export function GlobalProvider({ children }) {
                 getLinks,
                 links,
                 addLink,
-                addAvatarUrl
+                addAvatarUrl,
+                getUser,
+                user
             }}
         >
             {children}

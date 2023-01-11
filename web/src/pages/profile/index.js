@@ -1,9 +1,11 @@
 import styles from './Profile.module.css';
+import { useEffect, useState } from 'react';
 import useGlobalContext from '../../Hooks/useGlobalContext';
 
 import withAuth from '../../components/withAuth';
 import Sidebar from '../../components/Sidebar';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,7 +16,21 @@ import api from '../../services/api';
 import { MdEdit as IconEdit } from 'react-icons/md';
 
 function Profile() {
-    const { profile, addAvatarUrl} = useGlobalContext();
+    const { profile, addAvatarUrl, getUser, user} = useGlobalContext(); 
+    const [form, setForm] = useState({
+      username: user.username,
+      name: user.name,
+      email: user.email,
+      description: profile.description,
+      background_color: profile.background_color,
+      background_button_color: profile.background_button_color,
+      text_color: profile.text_color,
+      button_text_color: profile.button_text_color
+    })
+
+    function handleChangeInput(e) {
+      setForm({...form, [e.target.name]: e.target.value})
+    }
 
     async function handleUpload(e) {
         e.preventDefault();
@@ -35,6 +51,11 @@ function Profile() {
           console.log(error.message)
         }
       }
+
+      useEffect(() => {
+        getUser()
+        
+      }, [])
 
     return (
      <>
@@ -67,17 +88,33 @@ function Profile() {
 
             <div className={styles.contentInput}>
               <label>Username:</label>
-              <Input />
+              <Input 
+                type='text'
+                name='username'
+                placeholder='chama.bio/'
+                value={form.username}
+                handle={handleChangeInput}
+              />
             </div>
 
             <div className={styles.contentInput}>
               <label>Nome:</label>
-              <Input />
+              <Input 
+                type='text'
+                name="name"
+                value={form.name}
+                handle={handleChangeInput}
+              />
             </div>
 
             <div className={styles.contentInput}>
-              <label>Email:</label>
-              <Input />
+              <label>E-mail:</label>
+              <Input 
+                type='text'
+                name='email'
+                value={form.email}
+                handle={handleChangeInput}
+              />
             </div>
 
             <span>Deseja trocar a senha? <Link href={'/teste'} target='_blank'> clique aqui</Link></span>
@@ -86,10 +123,57 @@ function Profile() {
               <label>Descrição:</label>
               <textarea 
                   type='text'
+                  placeholder='Escreva uma breve descrição...'
                   id='description'
                   name='description'
+                  value={form.description}
+                  onChange={handleChangeInput}
+                  onKeyDown={(e) => setText(e.target.value)}
+                  maxLength='150'
               />
             </div>
+            
+            <h3>Estilo</h3>
+              <div className={styles.contentColor}>
+                <label>Cor de fundo:</label>
+                <input
+                  type='color' 
+                  name='background_color'
+                  value={form.background_color}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className={styles.contentColor}>
+                <label>Cor do botão:</label>
+                <input
+                  type='color' 
+                  name='background_button_color'
+                  value={form.background_button_color}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className={styles.contentColor}>
+                <label>Cor do texto:</label>
+                <input
+                  type='color' 
+                  name='text_color'
+                  value={form.text_color}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className={styles.contentColor}>
+                <label>Cor do Texto do botão:</label>
+                <input
+                  type='color' 
+                  name='button_text_color'
+                  value={form.button_text_color}
+                  onChange={handleChangeInput}
+                />
+              </div>
+          
+            <Button
+              text='Salvar alterações'
+            />
         </div>
      </>
     )

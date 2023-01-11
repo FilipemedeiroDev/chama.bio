@@ -83,11 +83,10 @@
     .main {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
       justify-content: center;
       margin: 20px 6px 0 6px;
     }
-
+    
     .contentInput {
       width: 100%;
     }

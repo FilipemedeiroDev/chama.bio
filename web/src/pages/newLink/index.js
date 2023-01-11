@@ -6,6 +6,7 @@ import useGlobalContext from '../../Hooks/useGlobalContext';
 
 import Sidebar from '../../components/Sidebar';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 import api from '../../services/api';
 
@@ -75,7 +76,10 @@ function NewLink() {
                     value={form.destination}
                     onChange={handleChangeInput}/>
             </div>
-            <button onClick={handleSubmit}>Criar</button>
+            <Button 
+              text='Criar'
+              handle={handleSubmit}
+            />
         </div>
      </>
     )

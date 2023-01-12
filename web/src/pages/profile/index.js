@@ -1,5 +1,6 @@
 import styles from './Profile.module.css';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import useGlobalContext from '../../Hooks/useGlobalContext';
 
 import withAuth from '../../components/withAuth';
@@ -17,10 +18,12 @@ import { MdEdit as IconEdit } from 'react-icons/md';
 
 function Profile() {
     const { profile, addAvatarUrl, getUser, user} = useGlobalContext(); 
-    const [form, setForm] = useState({
+    const [formUSer, setFormUser] = useState({
       username: user.username,
       name: user.name,
       email: user.email,
+    })
+    const [formProfile, setFormProfile] = useState({
       description: profile.description,
       background_color: profile.background_color,
       background_button_color: profile.background_button_color,
@@ -28,8 +31,10 @@ function Profile() {
       button_text_color: profile.button_text_color
     })
 
+    
     function handleChangeInput(e) {
-      setForm({...form, [e.target.name]: e.target.value})
+      setFormUser({...formUSer, [e.target.name]: e.target.value})
+      setFormProfile({...formProfile, [e.target.name]: e.target.value})
     }
 
     async function handleUpload(e) {
@@ -49,12 +54,75 @@ function Profile() {
           addAvatarUrl(data.avatarUrl)
         } catch (error) {
           console.log(error.message)
+          return
         }
       }
 
-      useEffect(() => {
-        getUser()
+      async function handleSubmit(e) {
+        e.preventDefault();
+
+        if(!formUSer.name) {
+          formUSer.name = user.name
+        }
+
+        if(!formUSer.email) {
+          formUSer.email = user.email
+        }
+
+         if(!formUSer.username) {
+          formUSer.username = user.username
+        }
+
+        if(!formProfile.description) {
+          formProfile.description = profile.description
+        }
+
+        if(!formProfile.background_color) {
+          formProfile.background_color = profile.background_color
+        }
+       
+        if(!formProfile.background_button_color) {   
+          formProfile.background_button_color = profile.background_button_color
+        }
+       
+        if(!formProfile.text_color) {
+          formProfile.text_color = profile.text_color
+        }
+     
+        try {
+          if(formUSer.username !== user.username) {
+            const { data: userUpdated } = await api.put('/users/edit', {
+              name: formUSer.name.trim(),
+              email: formUSer.email.trim(),
+              username: formUSer.username.trim()
+            })  
+            setFormUser({...prev => userUpdated})
+          }
+        } catch (error) {
+          console.log(error.message)
+          toast.error(error.response.data.message)
+          return
+        }
+
+        try {
+          const { data: profileUpdated } = await api.post('/profiles/update', {
+            description: formProfile.description.trim(),
+            background_color: formProfile.background_color,
+            background_button_color: formProfile.background_button_color,
+            text_color: formProfile.text_color,
+            button_text_color: formProfile.button_text_color
+          })
+          setFormProfile({...prev => profileUpdated})
+        } catch (error) {
+          console.log(error.message)
+          return
+        }
         
+        toast.success('Alterações salvas com sucesso!')
+      }
+
+      useEffect(() => {
+        getUser()       
       }, [])
 
     return (
@@ -92,7 +160,7 @@ function Profile() {
                 type='text'
                 name='username'
                 placeholder='chama.bio/'
-                value={form.username}
+                value={formUSer.username}
                 handle={handleChangeInput}
               />
             </div>
@@ -101,8 +169,8 @@ function Profile() {
               <label>Nome:</label>
               <Input 
                 type='text'
-                name="name"
-                value={form.name}
+                name='name'
+                value={formUSer.name}
                 handle={handleChangeInput}
               />
             </div>
@@ -112,7 +180,7 @@ function Profile() {
               <Input 
                 type='text'
                 name='email'
-                value={form.email}
+                value={formUSer.email}
                 handle={handleChangeInput}
               />
             </div>
@@ -124,11 +192,9 @@ function Profile() {
               <textarea 
                   type='text'
                   placeholder='Escreva uma breve descrição...'
-                  id='description'
                   name='description'
-                  value={form.description}
+                  value={formProfile.description}
                   onChange={handleChangeInput}
-                  onKeyDown={(e) => setText(e.target.value)}
                   maxLength='150'
               />
             </div>
@@ -139,7 +205,7 @@ function Profile() {
                 <input
                   type='color' 
                   name='background_color'
-                  value={form.background_color}
+                  value={formProfile.background_color}
                   onChange={handleChangeInput}
                 />
               </div>
@@ -148,7 +214,7 @@ function Profile() {
                 <input
                   type='color' 
                   name='background_button_color'
-                  value={form.background_button_color}
+                  value={formProfile.background_button_color}
                   onChange={handleChangeInput}
                 />
               </div>
@@ -157,7 +223,7 @@ function Profile() {
                 <input
                   type='color' 
                   name='text_color'
-                  value={form.text_color}
+                  value={formProfile.text_color}
                   onChange={handleChangeInput}
                 />
               </div>
@@ -166,13 +232,14 @@ function Profile() {
                 <input
                   type='color' 
                   name='button_text_color'
-                  value={form.button_text_color}
+                  value={formProfile.button_text_color}
                   onChange={handleChangeInput}
                 />
               </div>
           
             <Button
               text='Salvar alterações'
+              handle={handleSubmit}
             />
         </div>
      </>

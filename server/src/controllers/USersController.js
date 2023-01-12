@@ -74,6 +74,42 @@ class UsersController {
       }
     }
 
+    async editUser(req, res) {
+      const { id: userId } = req.user;
+      const { name, email, username } = req.body;
+
+      try {
+        if(!name) {
+          return res.status(400).json({message: 'Preencha o campo nome para continuar'})
+        }
+
+        if(!email) {
+          return res.status(400).json({message: 'Preencha o e-mail nome para continuar'})
+        }
+
+        if(!username) {
+          return res.status(400).json({message: 'Preencha o campo username para continuar'})
+        }
+
+        const user = await UserModel.findOne({ username: username });
+
+        if(user) {
+          return res.status(400).json({message: 'Já existe um usuário com esse username'})
+        }
+
+        await UserModel.updateMany({_id: userId}, {
+          name,
+          email,
+          username
+        })
+
+        const userUpdated = await UserModel.findOne({_id: userId}, '-password')
+
+        return res.status(200).json(userUpdated)
+      } catch (error) {
+        return res.status(500).json({ message:  error.message});
+      }
+    }
 
     async Login(req,res) {
       const { email, password } = req.body;

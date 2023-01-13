@@ -99,10 +99,11 @@ export default function SignUp() {
           route.push('sign-in')
           setIsLoading(false)
         } catch (error) {
-          setIsLoading(false)
           console.log(error)
           toast.error(error.response.data.message)
           return
+        } finally {
+          setIsLoading(false)
         }
     }
 

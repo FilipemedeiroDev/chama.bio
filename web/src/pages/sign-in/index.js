@@ -75,14 +75,15 @@ export default function SignIn() {
       router.push('/')
       setIsLoading(false)
     } catch (error) {
-      setIsLoading(false)
       if(error.response.data.message){
         toast.error(error.response.data.message)
       }else {
         console.log(error.response.message)
       }    
       return
-    } 
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (

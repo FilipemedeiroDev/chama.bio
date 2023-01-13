@@ -48,9 +48,10 @@ export default function Forgot() {
         router.push('/sign-in')
         setIsLoading(false)
       } catch (error) {
-        setIsLoading(false)
         toast.error(error.response.data.message)
         return
+      } finally {
+        setIsLoading(false)
       }
   }
 

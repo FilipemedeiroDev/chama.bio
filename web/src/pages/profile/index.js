@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import useGlobalContext from '../../Hooks/useGlobalContext';
 
-import withAuth from '../../components/withAuth';
 import Sidebar from '../../components/Sidebar';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -16,8 +15,8 @@ import api from '../../services/api';
 
 import { MdEdit as IconEdit } from 'react-icons/md';
 
-function Profile() {
-    const { profile, addAvatarUrl, getUser, user} = useGlobalContext(); 
+export default function Profile() {
+    const { profile, addAvatarUrl, user, getUser} = useGlobalContext(); 
     const [formUSer, setFormUser] = useState({
       username: user.username,
       name: user.name,
@@ -240,10 +239,27 @@ function Profile() {
             <Button
               text='Salvar alterações'
               handle={handleSubmit}
+              style={{
+                marginBottom: '20px'
+              }}
             />
         </div>
      </>
     )
 }
 
-export default withAuth(Profile)
+export async function getServerSideProps(ctx) {
+  const { cookies } = ctx.req
+    
+    if(!cookies.token) {
+        return {
+          redirect: {
+            destination: '/sign-in',
+            permanent: false
+          }
+        }
+      }
+
+      
+    return { props: { } }
+}

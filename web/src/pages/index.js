@@ -1,9 +1,7 @@
 import styles from '../styles/Home.module.css';
 import { useEffect } from 'react';
 
-import withAuth from '../components/withAuth';
 import useGlobalContext from '../Hooks/useGlobalContext';
-import getFirstName from '../utils/getFirstName';
 
 import { getItem } from '../utils/cookies';
 import { toast } from 'react-toastify';
@@ -13,10 +11,12 @@ import ContentLink from '../components/ContentLink';
 
 import Link from 'next/link';
 
-function Home() {
-  const { links, getLinks, setIsLoading } =  useGlobalContext()
+export default function Home() {
+  const { links, getLinks } =  useGlobalContext()
 
-  const firstName = getFirstName();
+  let name = getItem('name')
+  name = String(name).split(' ');
+  const firstName = name[0];
   const username = getItem('username');
 
   async function share() {
@@ -28,7 +28,6 @@ function Home() {
 
   useEffect(() => {
     getLinks()
-    setIsLoading(false)
   },[])
 
   return (
@@ -61,4 +60,17 @@ function Home() {
   )
 }
 
-export default withAuth(Home);
+export async function getServerSideProps(ctx) {
+  const { cookies } = ctx.req
+    
+    if(!cookies.token) {
+        return {
+          redirect: {
+            destination: '/sign-in',
+            permanent: false
+          }
+        }
+      }
+      
+    return { props: {} }
+}

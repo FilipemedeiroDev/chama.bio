@@ -1,7 +1,6 @@
 import styles from './NewLink.module.css';
 import { useState  } from 'react';
 import { toast } from 'react-toastify';
-import withAuth from '../../components/withAuth';
 import useGlobalContext from '../../Hooks/useGlobalContext';
 
 import Sidebar from '../../components/Sidebar';
@@ -10,7 +9,7 @@ import Button from '../../components/Button';
 
 import api from '../../services/api';
 
-function NewLink() {
+export default function NewLink() {
     const { addLink, setIsLoading } = useGlobalContext();
 
     const [form, setForm] = useState({
@@ -65,7 +64,8 @@ function NewLink() {
                     placeholder='Crie um nome para o seu link...' 
                     name='title'
                     value={form.title}
-                    onChange={handleChangeInput}/>
+                    handle={handleChangeInput}
+                    />
             </div>
             <div className={styles.contentInput}>
                 <label>Destino:</label>
@@ -74,7 +74,7 @@ function NewLink() {
                     placeholder='Digite ou cole aqui sua url...' 
                     name='destination'
                     value={form.destination}
-                    onChange={handleChangeInput}/>
+                    handle={handleChangeInput}/>
             </div>
             <Button 
               text='Criar'
@@ -85,4 +85,17 @@ function NewLink() {
     )
 }
 
-export default withAuth(NewLink)
+export async function getServerSideProps(ctx) {
+  const { cookies } = ctx.req
+    
+    if(!cookies.token) {
+        return {
+          redirect: {
+            destination: '/sign-in',
+            permanent: false
+          }
+        }
+      }
+      
+    return { props: {} }
+}

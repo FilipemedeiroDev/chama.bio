@@ -1,97 +1,94 @@
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-left: 280px;
+  margin-right: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.main h2 {
+  color: var(--green);
+  margin-bottom: 24px;
+}
+
+.contentInput {
+  display: flex;
+  flex-direction: column;
+  max-width: 550px;
+  width: 100%;
+  margin-bottom: 12px;
+
+  gap: 8px;
+}
+
+.main button {
+  display: flex;
+  max-width: 550px;
+  width: 100%;
+  height: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 12px;
+  line-height: 100%;
+  margin-top: 20px;
+
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  background: var(--green);
+  cursor: pointer;
+}
+
+.main button:hover {
+  opacity: 0.8;
+  transition: 0.35s;
+}
+
+.contentInput input {
+  display: flex;
+  justify-content: space-between;
+  -webkit-box-pack: justify;
+  align-items: center;
+  height: 38px;
+
+  padding: 2px 0 2px 20px;
+  border: none;
+  border-radius: 20px;
+
+  mix-blend-mode: screen;
+  background-color: whitesmoke;
+
+  cursor: pointer;
+  gap: 12px;
+}
+
+@media (width < 920px) {
+  .main {
+    transition: margin 0.6s;
+    margin-left: 78px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
-    max-width: 920px;
-    padding: 1rem;
-
-    margin-left: 280px;
-    margin-right: 10px;
-    margin-top: 20px;
-    overflow: hidden;
-  }
-
-  .main h2 {
-    color: var(--green);
-    margin-bottom: 24px;
+    justify-content: center;
+    margin: 20px 6px 0 6px;
   }
 
   .contentInput {
-    display: flex;
-    flex-direction: column;
-    max-width: 550px;
     width: 100%;
-    margin-bottom: 12px;
-
-    gap: 8px;
   }
 
   .main button {
-    display: flex;
-    max-width: 550px;
     width: 100%;
-    height: 100%;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-
-    color: white;
-    font-size: 12px;
-    line-height: 100%;
-    margin-top: 20px;
-    
-    padding: 12px 20px;
-    border: none;
-    border-radius: 20px;
-    background: var(--green);
-    cursor: pointer;
   }
-
-  .main button:hover {
-    opacity: 0.8;
-    transition: 0.350s;
-  }
-
-  .contentInput input {
-    display: flex;
-    justify-content: space-between;
-    -webkit-box-pack: justify;
-    align-items: center;
-    height: 38px;
-
-    padding: 2px 0 2px 20px;
-    border: none;
-    border-radius: 20px;
-
-    mix-blend-mode: screen;
-    background-color: whitesmoke;
-
-    cursor: pointer;
-    gap: 12px;
-  }
-  
-  @media (width < 920px) {
-    .main {
-      transition: margin 0.6s;
-      margin-left: 78px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin: 20px 6px 0 6px;
-    }
-    
-    .contentInput {
-      width: 100%;
-    }
-
-    .main button {
-      width: 100%;
-    }
-  }
+}

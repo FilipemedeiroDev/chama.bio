@@ -1,8 +1,8 @@
 import Sidebar from '../../components/Sidebar';
-import withAuth from '../../components/withAuth';
+
 import styles from './Preview.module.css';
 
-function Preview() {
+export default function Preview() {
     return (
     <>
       <Sidebar 
@@ -15,4 +15,19 @@ function Preview() {
   )
 }
 
- export default withAuth(Preview)
+export async function getServerSideProps(ctx) {
+  const { cookies } = ctx.req
+    
+    if(!cookies.token) {
+        return {
+          redirect: {
+            destination: '/sign-in',
+            permanent: false
+          }
+        }
+      }
+      
+    return { props: {} }
+}
+
+ 

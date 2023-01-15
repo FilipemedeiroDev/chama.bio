@@ -5,8 +5,7 @@
 
   padding: 1rem;
 
-  margin-left: 280px;
-  margin-right: 10px;
+  margin-left: 200px;
   margin-top: 20px;
   overflow: hidden;
 }
@@ -91,7 +90,7 @@
 @media (max-width: 480px) {
   .main {
     align-items: flex-start;
-    margin-left: 20px;
+    margin-left: 0px;
   }
   .contentShareLink {
     width: 100%;

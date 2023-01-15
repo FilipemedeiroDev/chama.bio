@@ -1,4 +1,6 @@
 import { createContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 import api from '../services/api';
 
@@ -8,8 +10,10 @@ export function GlobalProvider({ children }) {
     const [isLoading, setIsLoading] = useState(false);
     const [profile, setProfile] = useState({});
     const [links, setLinks] = useState([]);
-    const [user, setUser ] = useState({})
+    const [user, setUser ] = useState({});
     
+    
+    const router = useRouter()
 
     const getLinks = async () => {
       try {
@@ -20,7 +24,6 @@ export function GlobalProvider({ children }) {
         if(error.response.data.message === 'jwt expired'){
           router.push('/sign-in')
           toast.error('sessão expirada, faça o login novamente!')
-          return
         } else {
           console.log(error)
           return
@@ -95,7 +98,7 @@ export function GlobalProvider({ children }) {
                 addLink,
                 addAvatarUrl,
                 getUser,
-                user
+                user,
             }}
         >
             {children}

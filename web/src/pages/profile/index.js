@@ -17,13 +17,14 @@ import api from '../../services/api';
 import { MdEdit as IconEdit } from 'react-icons/md';
 
 export default function Profile() {
-    const { profile, addAvatarUrl, user, getUser , setIsLoading } = useGlobalContext(); 
+    const { profile, addAvatarUrl, user, setIsLoading } = useGlobalContext(); 
     const [formUSer, setFormUser] = useState({
       username: user.username,
       name: user.name,
       email: user.email,
     })
     const [formProfile, setFormProfile] = useState({
+      profile_title: profile.profile_title,
       description: profile.description,
       background_color: profile.background_color,
       background_button_color: profile.background_button_color,
@@ -73,7 +74,11 @@ export default function Profile() {
          if(!formUSer.username) {
           formUSer.username = user.username
         }
-
+        
+        if(!formProfile.profile_title) {
+          formProfile.profile_title = profile.profile_title
+        }
+        
         if(!formProfile.description) {
           formProfile.description = profile.description
         }
@@ -98,6 +103,7 @@ export default function Profile() {
               username: formUSer.username.trim()
             })  
             setFormUser({...prev => userUpdated})
+            
           }
         } catch (error) {
           setIsLoading(false);
@@ -110,6 +116,7 @@ export default function Profile() {
 
         try {
           const { data: profileUpdated } = await api.post('/profiles/update', {
+            profile_title: formProfile.profile_title.trim(),
             description: formProfile.description.trim(),
             background_color: formProfile.background_color,
             background_button_color: formProfile.background_button_color,
@@ -129,10 +136,7 @@ export default function Profile() {
         toast.success('Alterações salvas com sucesso!')
       }
 
-      useEffect(() => {
-        getUser()       
-      }, [])
-
+   
     return (
      <>
         <Sidebar 
@@ -193,7 +197,18 @@ export default function Profile() {
               />
             </div>
 
+            
             <span>Deseja trocar a senha? <Link href={'/changePassword'}> clique aqui</Link></span>
+            <div className={styles.contentInput}>
+              <label>Título:</label>
+              <Input 
+                type='text'
+                name='profile_title'
+                placeholder='Escreva um título para sua página...'
+                value={formProfile.profile_title}
+                handle={handleChangeInput}
+              />
+            </div>
 
             <div className={styles.areaDescription}>
               <label>Descrição:</label>

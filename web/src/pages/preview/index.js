@@ -2,14 +2,19 @@ import Sidebar from '../../components/Sidebar';
 
 import styles from './Preview.module.css';
 
-export default function Preview() {
+export default function Preview({ username }) {
+
+    const baseUrl = process.env.NEXT_PUBLIC_APP_HOST;
+
     return (
     <>
       <Sidebar 
         page='preview'
       />
       <div className={styles.main}>
-        <h1>Preview</h1>
+        <iframe src={`${baseUrl}/${username}`}>
+
+        </iframe>
       </div>
     </>
   )
@@ -27,7 +32,7 @@ export async function getServerSideProps(ctx) {
         }
       }
       
-    return { props: {} }
+    return { props: { username: cookies.username} }
 }
 
  

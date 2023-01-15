@@ -32,11 +32,6 @@
 }
 
 .link {
-  width: 550px;
-}
-
-@media (max-width: 768px) {
-  .link {
-    width: 100%;
-  }
+  max-width: 550px;
+  width: 100%;
 }

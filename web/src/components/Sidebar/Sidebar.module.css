@@ -9,6 +9,8 @@
   padding: 20px 10px 30px 10px;
   border-right: 1px solid var(--gray);
   transition: all 0.4s;
+  background-color: #fff;
+  z-index: 999;
 }
 
 .sidebar nav {

@@ -57,10 +57,10 @@ export default function Sidebar({ page }) {
         </header>
 
         <nav>
-        <Link href={'/'}>
+        <Link href='/'>
           <button>
             <span style={{
-            background: page === 'home' && 'whitesmoke'
+              backgroundColor: page === 'home' ? 'whitesmoke' : 'none'
             }}>
               <IconHome />
               <span>Home</span>
@@ -68,10 +68,10 @@ export default function Sidebar({ page }) {
           </button>
         </Link>
 
-        <Link href={'/newLink'}>
+        <Link href='/newLink'>
           <button>
             <span style={{
-            background: page === 'newlink' && 'whitesmoke'
+              backgroundColor: page === 'newlink' ? 'whitesmoke' : 'none'
             }}>
               <IconLink />
               <span>Link +</span>
@@ -82,7 +82,7 @@ export default function Sidebar({ page }) {
         <Link href='/profile'>
           <button>
             <span style={{
-            background: page === 'profile' && 'whitesmoke'
+            backgroundColor: page === 'profile' ? 'whitesmoke' : 'none'
             }}>
               <IconProfile />
               <span>Perfil</span>
@@ -93,7 +93,7 @@ export default function Sidebar({ page }) {
         <Link href='/preview'>
           <button>
             <span style={{
-            background: page === 'preview' && 'whitesmoke'
+              backgroundColor: page === 'preview' ?  'whitesmoke' : 'none'
             }}>
               <EyeIcon />
               <span>Preview</span>

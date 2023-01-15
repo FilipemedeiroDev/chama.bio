@@ -4,24 +4,22 @@ import { useEffect } from 'react';
 import useGlobalContext from '../Hooks/useGlobalContext';
 
 import { getItem } from '../utils/cookies';
-import { toast } from 'react-toastify';
 
 import Sidebar from '../components/Sidebar';
 import ContentLink from '../components/ContentLink';
 
 import Link from 'next/link';
 
-export default function Home() {
-  const { links, getLinks, getUser } =  useGlobalContext()
+export default function Home({ username, cookieName}) {
+  const { links, getLinks, getUser, getProfile } =  useGlobalContext()
 
-  let name = getItem('name')
+  let name = cookieName
   name = String(name).split(' ');
   const firstName = name[0];
-  const username = getItem('username');
 
   async function share() {
     let shareData = {
-      url: `https://chama.bio/${username}`
+      url: `${process.env.NEXT_PUBLIC_APP_HOST}/${username}`
     }
     await navigator.share(shareData)
   }
@@ -29,6 +27,7 @@ export default function Home() {
   useEffect(() => {
     getLinks()
     getUser()
+    getProfile()
   },[])
 
   return (
@@ -63,7 +62,7 @@ export default function Home() {
 
 export async function getServerSideProps(ctx) {
   const { cookies } = ctx.req
-    
+
     if(!cookies.token) {
         return {
           redirect: {
@@ -71,7 +70,7 @@ export async function getServerSideProps(ctx) {
             permanent: false
           }
         }
-      }
-      
-    return { props: {} }
+      } 
+
+    return { props: { username: cookies.username, cookieName: cookies.name} }
 }

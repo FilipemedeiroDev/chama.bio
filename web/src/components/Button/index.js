@@ -11,7 +11,7 @@ export default function Button({ text, handle, style, ...props}) {
       onClick={handle}
       style={style}
     >
-     {isLoading ? props.children : text}  
+     { isLoading ? props.children : text}  
     </button>
   )
 }

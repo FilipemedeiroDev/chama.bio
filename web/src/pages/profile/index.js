@@ -6,6 +6,7 @@ import useGlobalContext from '../../Hooks/useGlobalContext';
 import Sidebar from '../../components/Sidebar';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import Loading from '../../components/Loading';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,7 +17,7 @@ import api from '../../services/api';
 import { MdEdit as IconEdit } from 'react-icons/md';
 
 export default function Profile() {
-    const { profile, addAvatarUrl, user, getUser} = useGlobalContext(); 
+    const { profile, addAvatarUrl, user, getUser , setIsLoading } = useGlobalContext(); 
     const [formUSer, setFormUser] = useState({
       username: user.username,
       name: user.name,
@@ -59,6 +60,7 @@ export default function Profile() {
 
       async function handleSubmit(e) {
         e.preventDefault();
+        setIsLoading(true);
 
         if(!formUSer.name) {
           formUSer.name = user.name
@@ -98,9 +100,12 @@ export default function Profile() {
             setFormUser({...prev => userUpdated})
           }
         } catch (error) {
+          setIsLoading(false);
           console.log(error.message)
           toast.error(error.response.data.message)
           return
+        } finally {
+          setIsLoading(false);
         }
 
         try {
@@ -112,9 +117,13 @@ export default function Profile() {
             button_text_color: formProfile.button_text_color
           })
           setFormProfile({...prev => profileUpdated})
+          setIsLoading(false);
         } catch (error) {
+          setIsLoading(false)
           console.log(error.message)
           return
+        } finally {
+          setIsLoading(false)
         }
         
         toast.success('Alterações salvas com sucesso!')
@@ -184,7 +193,7 @@ export default function Profile() {
               />
             </div>
 
-            <span>Deseja trocar a senha? <Link href={'/teste'} target='_blank'> clique aqui</Link></span>
+            <span>Deseja trocar a senha? <Link href={'/changePassword'}> clique aqui</Link></span>
 
             <div className={styles.areaDescription}>
               <label>Descrição:</label>
@@ -242,7 +251,9 @@ export default function Profile() {
               style={{
                 marginBottom: '20px'
               }}
-            />
+            >
+              <Loading />
+            </Button>
         </div>
      </>
     )

@@ -12,7 +12,7 @@ import ContentLink from '../components/ContentLink';
 import Link from 'next/link';
 
 export default function Home() {
-  const { links, getLinks } =  useGlobalContext()
+  const { links, getLinks, getUser } =  useGlobalContext()
 
   let name = getItem('name')
   name = String(name).split(' ');
@@ -28,6 +28,7 @@ export default function Home() {
 
   useEffect(() => {
     getLinks()
+    getUser()
   },[])
 
   return (

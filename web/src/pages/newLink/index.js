@@ -6,6 +6,7 @@ import useGlobalContext from '../../Hooks/useGlobalContext';
 import Sidebar from '../../components/Sidebar';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import Loading from '../../components/Loading';
 
 import api from '../../services/api';
 
@@ -21,7 +22,8 @@ export default function NewLink() {
         setForm({...form, [e.target.name]: e.target.value})
     }
 
-    async function handleSubmit () {
+    async function handleSubmit (e) {
+        e.preventDefault()
         setIsLoading(true) 
     
         if(form.title === '' || form.destination === ''){
@@ -47,6 +49,8 @@ export default function NewLink() {
           setIsLoading(false)
           toast.error(error.message)
           return
+        } finally {
+          setIsLoading(false)
         }
       }
 
@@ -79,7 +83,9 @@ export default function NewLink() {
             <Button 
               text='Criar'
               handle={handleSubmit}
-            />
+            >
+              <Loading />
+            </Button>
         </div>
      </>
     )

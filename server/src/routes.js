@@ -16,7 +16,8 @@ routes.post('/users/login', UsersController.Login)
 routes.post('/users/forgot', UsersController.Forgot)
 routes.post('/users/reset/:code', UsersController.Reset)
 routes.get('/users/me', authentication, UsersController.getUser);
-routes.put('/users/edit', authentication, USersController.editUser)
+routes.put('/users/edit', authentication, USersController.editUser);
+routes.patch('/users/change-password', authentication, UsersController.ChangePassword)
 
 
 routes.get('/profiles/me', authentication, ProfileController.getProfile);

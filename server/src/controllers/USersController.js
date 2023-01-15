@@ -208,6 +208,35 @@ class UsersController {
           return res.status(500).json({ message:  error.message});
         }
     }
+
+    async ChangePassword(req, res) {
+      const { id: userId } = req.user;
+      const { currentPassword, newPassword } = req.body;
+
+      try {
+        const user = await UserModel.findById({ _id: userId })
+     
+        if(!user) {
+          return res.status(404).json({ message: 'Usuário não encontrado.'})
+        }
+        
+        const validatePassword = await bcrypt.compare(currentPassword, user.password);
+
+        if(!validatePassword) {
+          return res.status(400).json({message: 'Senha atual inválida.'})
+        }
+
+        const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+        await UserModel.updateOne({_id: userId}, {
+          password: encryptedPassword
+        })
+
+        return res.status(200).json({message: 'Senha atualizada com sucesso!'})
+      } catch (error) {
+        return res.status(500).json({ message:  error.message});
+      }
+    }
 }
 
 module.exports = new UsersController();

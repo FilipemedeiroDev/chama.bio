@@ -98,11 +98,12 @@ class ProfileController {
 
   async updateProfile(req, res) {
     const {id: userId} = req.user;
-    const {description, background_color, background_button_color, text_color, button_text_color } = req.body;
+    const {description, background_color, background_button_color, text_color, button_text_color, profile_title } = req.body;
 
     try {
       
       const userUpdated = await UserProfile.updateMany({ user_id: userId }, {
+        profile_title,
         description,
         background_color,
         background_button_color,

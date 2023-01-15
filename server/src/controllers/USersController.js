@@ -135,7 +135,7 @@ class UsersController {
         }, jwtSecret, {
           expiresIn: '4h'
         });
-
+        
         return res.status(200).json({
           user: {
             id: user._id,

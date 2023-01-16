@@ -10,7 +10,7 @@ Para instalar e executar este aplicativo, você precisará ter o [Node.js](https
 1. Clone este repositório
 
 ```sh
-git clone https://github.com/FilipemedeiroDev/agregador-de-links.git
+git clone https://github.com/FilipemedeiroDev/chama.bio.git
 ```
 
 2. Instale as dependências

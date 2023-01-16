@@ -1,7 +1,7 @@
 import styles from './SignUp.module.css';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import useProfile from '../../Hooks/useProfile';
+import useGlobalContext from '../../Hooks/useGlobalContext';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -30,7 +30,7 @@ export default function SignUp() {
   const [errorUsername, setErrorUsername] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const { setIsLoading } = useProfile();
+  const { setIsLoading } = useGlobalContext();
 
   const route = useRouter();
 
@@ -99,10 +99,11 @@ export default function SignUp() {
           route.push('sign-in')
           setIsLoading(false)
         } catch (error) {
-          setIsLoading(false)
           console.log(error)
           toast.error(error.response.data.message)
           return
+        } finally {
+          setIsLoading(false)
         }
     }
 
@@ -111,7 +112,7 @@ export default function SignUp() {
         <Logo />
         <form>
           <div className={styles.content}>
-            <h1>Cadastre-se</h1>
+            <h2>Cadastre-se</h2>
             <div className={styles.inputContent}>
               <div>
                 <label>Nome</label>

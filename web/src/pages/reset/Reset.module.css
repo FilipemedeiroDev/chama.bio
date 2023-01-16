@@ -22,7 +22,7 @@
 }
 
 .inputContent label {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .inputContent span {
@@ -36,7 +36,7 @@
 .iconEye {
   position: absolute;
 
-  top: 38px;
+  top: 34px;
   right: 10px;
 }
 

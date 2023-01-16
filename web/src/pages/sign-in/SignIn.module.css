@@ -13,8 +13,8 @@
   margin-top: 40px;
 }
 
-.content h1 {
-  margin-bottom: 30px;
+.content h2 {
+  margin-bottom: 10px;
 
   text-align: center;
 }
@@ -27,7 +27,7 @@
 }
 
 .inputContent label {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .inputContent span {
@@ -41,7 +41,7 @@
 .iconEye {
   position: absolute;
 
-  top: 38px;
+  top: 34px;
   right: 10px;
 }
 
@@ -64,14 +64,5 @@
   .content {
     margin-top: 50px;
     width: 100%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .content {
-    margin-top: 50px;
-  }
-  .content h1 {
-    margin-bottom: 10px;
   }
 }

@@ -7,6 +7,10 @@ const UserProfileSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
+  profile_title: {
+    type: String,
+    default: ''
+  },
   description:{
     type: String,
     default: ''

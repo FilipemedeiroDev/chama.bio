@@ -1,65 +1,38 @@
+import Sidebar from '../../components/Sidebar';
+
 import styles from './Preview.module.css';
-import { useState} from 'react';
 
-import Link from 'next/link';
+export default function Preview({ username }) {
 
-import Header from '../../components/Header';
-import Button from '../../components/Button';
-import ModalProfile from '../../components/ModalProfile';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_HOST;
 
-export default function Preview({ cookies }) {
-  const [showModalProfile, setShowModalProfile] = useState(false);
-
-  const previewUrl = `${process.env.NEXT_PUBLIC_APP_HOST}/${cookies.username}`;
-  
-  return (
-    <div className={styles.container}>
-      <Header
+    return (
+    <>
+      <Sidebar 
         page='preview'
       />
-      <div className={styles.content}>
-        <Button
-          text='Editar página'
-          style={{
-            maxWidth: '350px',
-            marginTop: '120px'
-          }}
-          handle={() => {
-            setShowModalProfile(true)
-            document.body.style.overflow = 'hidden'
-          }}
-        >
-          Editar página
-        </Button>
-        <Link href={previewUrl} style={{ marginTop: '20px' }} target='_blank'>Ir para a página</Link>
-        {showModalProfile && <ModalProfile setShowModalProfile={setShowModalProfile} />}
-        <div className={styles.wrapper}>
-          <div className={styles.screen}>
-              <iframe
-                className={styles.iframe}
-                src={previewUrl}
-                frameBorder='0'
-                id="iframe"
-                >
-              </iframe>
-          </div>
-        </div>
+      <div className={styles.main}>
+        <iframe src={`${baseUrl}/${username}`}>
+
+        </iframe>
       </div>
-    </div>
+    </>
   )
 }
 
 export async function getServerSideProps(ctx) {
   const { cookies } = ctx.req
-
-  if (!cookies.token) {
-    return {
-      redirect: {
-        destination: '/sign-in',
-        permanent: false
+    
+    if(!cookies.token) {
+        return {
+          redirect: {
+            destination: '/sign-in',
+            permanent: false
+          }
+        }
       }
-    }
-  }
-
-  return { props: { cookies } }
+      
+    return { props: { username: cookies.username} }
 }
+
+ 

@@ -10,11 +10,11 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { MdEdit } from 'react-icons/md';
 import { GiCancel } from 'react-icons/gi';
 import { MdOutlineContentCopy } from 'react-icons/md'
-import useProfile from '../../Hooks/useProfile';
+import useGlobalContext from '../../Hooks/useGlobalContext';
 
 
 export default function ContentLink({ link }) {
-  const { updateLink, deleteLink } = useProfile()
+  const { updateLink, deleteLink } = useGlobalContext()
   const [isTitleEditable, setIsTitleEditable] = useState(false);
   const [isDestinationEditable, setIsDestinationEditable] = useState(false);
   const [form, setForm] = useState({
@@ -136,6 +136,8 @@ export default function ContentLink({ link }) {
                 name='title'
                 style={{
                   height: '12px',
+                  border: '1px solid gray',
+                  background: 'white'
                 }}
                 handle={handleChangeInput}
                 handleBlur={handleSubmit}
@@ -176,6 +178,8 @@ export default function ContentLink({ link }) {
                 name='destination'
                 style={{
                   height: '12px',
+                  border: '1px solid gray',
+                  background: 'white'
                 }}
                 handle={handleChangeInput}
                 handleBlur={handleSubmit}
@@ -188,14 +192,14 @@ export default function ContentLink({ link }) {
 
         <div className={styles.deleteIcon}>
             <RiDeleteBin5Line 
-              fontSize='22px'
+              fontSize='20px'
               cursor='pointer'
               onClick={() => handleDelete(link._id)}
             />
         </div>
         <div className={styles.copyIcon}>
           <MdOutlineContentCopy 
-             fontSize='20px'
+             fontSize='18px'
              cursor='pointer'
              onClick={copyLink}
           />

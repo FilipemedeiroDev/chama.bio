@@ -1,19 +1,70 @@
-.content {
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  margin-top: 100px;
+
   padding: 1rem;
+
+  margin-left: 200px;
+  margin-top: 20px;
+  overflow: hidden;
 }
 
-.divider {
+.main h1 {
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.main span {
+  font-weight: 700;
+  color: var(--green);
+}
+
+.contentShareLink {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+  max-width: 550px;
   width: 100%;
-  max-width: 350px;
-  text-align: center;
-  margin-top: 20px;
-  border-top: 1px solid var(--gray);
-  padding-top: 10px;
+}
+
+.shareLink {
+  display: flex;
+  cursor: pointer;
+  padding: 2px 0 2px 20px;
+  border-radius: 20px;
+  align-items: center;
+  mix-blend-mode: screen;
+  background-color: whitesmoke;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.url {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.shareLink button {
+  height: 100%;
+  display: flex;
+  color: white;
+  font-size: 12px;
+  line-height: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background: var(--green);
+  cursor: pointer;
 }
 
 .myLink {
@@ -22,15 +73,29 @@
   align-items: center;
   width: 550px;
   position: relative;
+  margin-top: 20px;
 }
 
-.deleteIcon {
-  position: absolute;
-  right: 10px;
-  bottom: 5px;
+@media (width < 920px) {
+  .main {
+    transition: margin 0.6s;
+    margin-left: 78px;
+  }
+
+  .myLink {
+    width: 100%;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+  .main {
+    align-items: flex-start;
+    margin-left: 0px;
+  }
+  .contentShareLink {
+    width: 100%;
+  }
+
   .myLink {
     width: 100%;
   }

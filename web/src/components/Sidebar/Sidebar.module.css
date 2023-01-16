@@ -1,0 +1,186 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 240px;
+  height: 100%;
+  padding: 20px 10px 30px 10px;
+  border-right: 1px solid var(--gray);
+  transition: all 0.4s;
+  background-color: #fff;
+  z-index: 999;
+}
+
+.sidebar nav {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sidebarHeader {
+  width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebarHeader span {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.4s;
+  margin-left: 10px;
+}
+
+.avatar:hover {
+  transform: scale(1.2);
+}
+
+.sidebar button {
+  height: 60px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+}
+
+.sidebar button > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 16px 0 12px;
+  border-radius: 24px;
+  line-height: 1;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.sidebar button:hover > span {
+  background: whitesmoke;
+}
+
+.sidebar button svg {
+  position: relative;
+  font-size: 28px;
+  transition: 0.2s;
+  color: inherit;
+}
+
+@media (width < 920px) {
+  .sidebar {
+    width: 72px;
+  }
+
+  .sidebar button > span {
+    width: 50px;
+  }
+
+  .sidebar button > span > span {
+    display: none;
+  }
+}
+
+.menu {
+  display: none;
+  align-self: flex-start;
+  align-items: center;
+  margin: 16px;
+  background: transparent;
+  border: 0;
+  transition: all 0.6s;
+}
+
+.menu svg {
+  font-size: 24px;
+  color: black;
+  z-index: 9999;
+}
+
+.sidebarMobile {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 30px 10px 30px 10px;
+  border-right: 1px solid var(--gray);
+  background: #fff;
+  animation: showSidebar 0.6s;
+  z-index: 999;
+}
+
+.sidebarMobile nav {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.sidebarMobile button {
+  height: 60px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+}
+
+.sidebarMobile button > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 16px 0 12px;
+  border-radius: 24px;
+  line-height: 1;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+@keyframes showSidebar {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes closeSidebar {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    display: flex;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .avatar {
+    display: none;
+  }
+}

@@ -10,11 +10,11 @@ import BlankImageProfile from '../assets/blank-image-profile.png'
 
 import { BsFillShareFill } from 'react-icons/bs'
 
-export default function Username({ user }) {
+export default function Username({ user, username }) {
 
   async function share() {
     let shareData = {
-      url: window.location.href
+      url: `${process.env.NEXT_PUBLIC_APP_HOST}/${username}`
     }
     await navigator.share(shareData)
   }
@@ -51,19 +51,21 @@ export default function Username({ user }) {
         />
       </div>
       <h2
-      style={{
-        color: user.profile.text_color
-      }}
-      >{user.name}</h2>
+        style={{
+          color: user.profile.text_color,
+        }}
+      >
+        {user.profile.profile_title}
+      </h2>
       <div 
         className={styles.description}
         style={{
             color: user.profile.text_color,
           }}
         >
-          <span>
+          <p>
           {user.profile.description}
-          </span>
+          </p>
       </div>
       {
         user.links.map(link => (
@@ -95,7 +97,8 @@ export async function getServerSideProps(ctx) {
 
     return {
       props: {
-        user
+        user,
+        username
       }
     }
   } catch (error) {

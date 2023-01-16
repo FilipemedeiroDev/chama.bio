@@ -58,6 +58,59 @@ class UsersController {
           }
     }
 
+    async getUser(req, res) {
+      const { id: userId } = req.user;
+
+      try {
+        const user = await UserModel.findOne({_id: userId }, '-password')
+        
+        if(!user) {
+          return res.status(404).json({message: 'Usuário não encontrado'})
+        }
+
+        return res.status(200).json(user)
+      } catch (error) {
+        return res.status(500).json({ message:  error.message});
+      }
+    }
+
+    async editUser(req, res) {
+      const { id: userId } = req.user;
+      const { name, email, username } = req.body;
+
+      try {
+        if(!name) {
+          return res.status(400).json({message: 'Preencha o campo nome para continuar'})
+        }
+
+        if(!email) {
+          return res.status(400).json({message: 'Preencha o e-mail nome para continuar'})
+        }
+
+        if(!username) {
+          return res.status(400).json({message: 'Preencha o campo username para continuar'})
+        }
+
+        const user = await UserModel.findOne({ username: username });
+
+        if(user) {
+          return res.status(400).json({message: 'Já existe um usuário com esse username'})
+        }
+
+        await UserModel.updateMany({_id: userId}, {
+          name,
+          email,
+          username
+        })
+
+        const userUpdated = await UserModel.findOne({_id: userId}, '-password')
+
+        return res.status(200).json(userUpdated)
+      } catch (error) {
+        return res.status(500).json({ message:  error.message});
+      }
+    }
+
     async Login(req,res) {
       const { email, password } = req.body;
 
@@ -82,11 +135,13 @@ class UsersController {
         }, jwtSecret, {
           expiresIn: '4h'
         });
-
+        
         return res.status(200).json({
           user: {
             id: user._id,
-            username:  user.username
+            name: user.name,
+            email: user.email,
+            username:  user.username,
           },
           token
         });
@@ -152,6 +207,35 @@ class UsersController {
         } catch (error) {
           return res.status(500).json({ message:  error.message});
         }
+    }
+
+    async ChangePassword(req, res) {
+      const { id: userId } = req.user;
+      const { currentPassword, newPassword } = req.body;
+
+      try {
+        const user = await UserModel.findById({ _id: userId })
+     
+        if(!user) {
+          return res.status(404).json({ message: 'Usuário não encontrado.'})
+        }
+        
+        const validatePassword = await bcrypt.compare(currentPassword, user.password);
+
+        if(!validatePassword) {
+          return res.status(400).json({message: 'Senha atual inválida.'})
+        }
+
+        const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+        await UserModel.updateOne({_id: userId}, {
+          password: encryptedPassword
+        })
+
+        return res.status(200).json({message: 'Senha atualizada com sucesso!'})
+      } catch (error) {
+        return res.status(500).json({ message:  error.message});
+      }
     }
 }
 

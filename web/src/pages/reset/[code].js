@@ -2,7 +2,7 @@ import styles from './Reset.module.css';
 import {  useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import useProfile from '../../Hooks/useProfile';
+import useGlobalContext from '../../Hooks/useGlobalContext';
 
 import api from '../../services/api'
 
@@ -20,7 +20,7 @@ export default function Reset() {
   const [form, setForm] = useState({newPassword: ''});
   const [errorPassword, setErrorPassword] = useState(false);
 
-  const { setIsLoading } = useProfile();
+  const { setIsLoading } = useGlobalContext();
 
   const router = useRouter();
   const { code } =  router.query
@@ -64,6 +64,8 @@ export default function Reset() {
       toast.error(error.response.data.message)
       router.push('sign-in')
       return
+    } finally {
+      setIsLoading(false)
     }
   }
 

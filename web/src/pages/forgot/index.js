@@ -2,7 +2,7 @@ import styles from './Forgot.module.css'
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import useProfile from '../../Hooks/useProfile';
+import useGlobalContext from '../../Hooks/useGlobalContext';
 
 import api from '../../services/api';
 
@@ -18,9 +18,10 @@ export default function Forgot() {
   const [form, setForm] = useState({email: ''});
   const [errorEmail, setErrorEmail] = useState(false);
 
-  const { setIsLoading } = useProfile();
+  const { setIsLoading } = useGlobalContext();
 
-  const router = useRouter();
+  const router= useRouter();
+
 
   function handleChangeInput(e) {
     setForm({...form, [e.target.name]: e.target.value})
@@ -50,6 +51,8 @@ export default function Forgot() {
         setIsLoading(false)
         toast.error(error.response.data.message)
         return
+      } finally {
+        setIsLoading(false)
       }
   }
 

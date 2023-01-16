@@ -1,9 +1,7 @@
 import styles from '../styles/Home.module.css';
-import { useEffect } from 'react';
+
 
 import useGlobalContext from '../Hooks/useGlobalContext';
-
-import { getItem } from '../utils/cookies';
 
 import Sidebar from '../components/Sidebar';
 import ContentLink from '../components/ContentLink';
@@ -11,7 +9,7 @@ import ContentLink from '../components/ContentLink';
 import Link from 'next/link';
 
 export default function Home({ username, cookieName}) {
-  const { links, getLinks, getUser, getProfile } =  useGlobalContext()
+  const { links } =  useGlobalContext()
 
   let name = cookieName
   name = String(name).split(' ');
@@ -24,11 +22,6 @@ export default function Home({ username, cookieName}) {
     await navigator.share(shareData)
   }
 
-  useEffect(() => {
-    getLinks()
-    getUser()
-    getProfile()
-  },[])
 
   return (
     <>

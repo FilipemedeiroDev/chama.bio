@@ -36,7 +36,7 @@
   border-radius: 20px;
   align-items: center;
   mix-blend-mode: screen;
-  background-color: whitesmoke;
+  background-color: #f5f5f5;
   -webkit-box-pack: justify;
   justify-content: space-between;
   gap: 12px;
@@ -53,7 +53,7 @@
 .shareLink button {
   height: 100%;
   display: flex;
-  color: white;
+  color: #fff;
   font-size: 12px;
   line-height: 100%;
   padding: 12px 20px;

@@ -16,7 +16,7 @@
 }
 
 .main small {
-  color: gray;
+  color: #808080;
   margin-bottom: 24px;
 }
 
@@ -47,7 +47,7 @@
   padding: 2px;
   border-radius: 50%;
   box-shadow: rgb(0 0 0 / 20%) 0px 0px 12px 2px;
-  background-color: white;
+  background-color: #ffffff;
 
   cursor: pointer;
 }
@@ -79,7 +79,7 @@
   padding: 14px;
   border: none;
   border-radius: 24px;
-  background: whitesmoke;
+  background: #f5f5f5;
   resize: none;
 }
 

@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 
 
 function MyApp({ Component, pageProps}) {
+
   return (
     <>
       <GlobalProvider>

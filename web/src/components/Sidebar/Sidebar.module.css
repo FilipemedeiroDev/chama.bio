@@ -66,7 +66,7 @@
 }
 
 .sidebar button:hover > span {
-  background: whitesmoke;
+  background: #f5f5f5;
 }
 
 .sidebar button svg {
@@ -102,7 +102,7 @@
 
 .menu svg {
   font-size: 24px;
-  color: black;
+  color: #000000;
   z-index: 9999;
 }
 

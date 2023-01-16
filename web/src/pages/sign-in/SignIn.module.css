@@ -31,7 +31,7 @@
 }
 
 .inputContent span {
-  color: red;
+  color: #ff0000;
 }
 
 .inputPassword {
@@ -54,7 +54,6 @@
   text-align: center;
   margin-top: 20px;
 }
-
 
 @media (max-width: 468px) {
   .container {

@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
@@ -83,6 +83,12 @@ export function GlobalProvider({ children }) {
           }
         })
       }
+
+      useEffect(() => {
+        getLinks()
+        getUser()
+        getProfile()
+      },[])
 
     return (
         <GlobalContext.Provider

@@ -1,5 +1,5 @@
 import styles from './Profile.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useGlobalContext from '../../Hooks/useGlobalContext';
 
@@ -75,7 +75,7 @@ export default function Profile() {
           formUSer.username = user.username
         }
         
-        if(!formProfile.profile_title) {
+        if(formProfile.profile_title === profile.profile_title) {
           formProfile.profile_title = profile.profile_title
         }
         
@@ -102,8 +102,7 @@ export default function Profile() {
               email: formUSer.email.trim(),
               username: formUSer.username.trim()
             })  
-            setFormUser({...prev => userUpdated})
-            
+            setFormUser({...prev => userUpdated})     
           }
         } catch (error) {
           setIsLoading(false);
@@ -136,7 +135,6 @@ export default function Profile() {
         toast.success('Alterações salvas com sucesso!')
       }
 
-   
     return (
      <>
         <Sidebar 
@@ -276,16 +274,17 @@ export default function Profile() {
 
 export async function getServerSideProps(ctx) {
   const { cookies } = ctx.req
-    
-    if(!cookies.token) {
-        return {
-          redirect: {
-            destination: '/sign-in',
-            permanent: false
-          }
+  
+
+  if(!cookies.token) {
+      return {
+        redirect: {
+          destination: '/sign-in',
+          permanent: false
         }
       }
-
+    }
       
     return { props: { } }
 }
+

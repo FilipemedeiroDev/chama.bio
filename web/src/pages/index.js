@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css';
-
+import { useEffect } from 'react';
+import { toast } from "react-toastify";
 
 import useGlobalContext from '../Hooks/useGlobalContext';
 
@@ -9,18 +10,26 @@ import ContentLink from '../components/ContentLink';
 import Link from 'next/link';
 
 export default function Home({ username, cookieName}) {
-  const { links } =  useGlobalContext()
+  const { links, getLinks, getUser, getProfile} =  useGlobalContext()
 
   let name = cookieName
   name = String(name).split(' ');
   const firstName = name[0];
 
-  async function share() {
-    let shareData = {
-      url: `${process.env.NEXT_PUBLIC_APP_HOST}/${username}`
-    }
-    await navigator.share(shareData)
+  function copyLink() {
+    const linkToCopy = `${window.location.href}/${username}`
+
+    window.navigator.clipboard
+    .writeText(linkToCopy)
+    .then(toast.success('Destino copiado para a área de transferência!'))
   }
+
+
+  useEffect(() => {
+    getLinks()
+    getUser()
+    getProfile()
+  },[])
 
 
   return (
@@ -36,7 +45,7 @@ export default function Home({ username, cookieName}) {
             <div className={styles.url}>
               <Link href={`/${username}`} target='_blank'>chama.bio/{username}</Link>
             </div>
-            <button onClick={share}>Compartilhar</button>
+            <button onClick={copyLink}>Compartilhar</button>
           </div>
         </div>
         {

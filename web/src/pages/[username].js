@@ -1,4 +1,5 @@
 import styles from '../styles/Username.module.css'
+import { toast } from "react-toastify";
 
 import Image from "next/image";
 import Link from 'next/link';
@@ -12,11 +13,12 @@ import { BsFillShareFill } from 'react-icons/bs'
 
 export default function Username({ user, username }) {
 
-  async function share() {
-    let shareData = {
-      url: `${process.env.NEXT_PUBLIC_APP_HOST}/${username}`
-    }
-    await navigator.share(shareData)
+  function copyLink() {
+    const linkToCopy = `${window.location.href}`
+
+    window.navigator.clipboard
+    .writeText(linkToCopy)
+    .then(toast.success('Destino copiado para a área de transferência!'))
   }
 
   return (
@@ -47,7 +49,7 @@ export default function Username({ user, username }) {
             cursor: 'pointer'
           }}
           fontSize='24px'
-          onClick={share}
+          onClick={copyLink}
         />
       </div>
       <h2

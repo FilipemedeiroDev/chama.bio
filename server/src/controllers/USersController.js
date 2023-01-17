@@ -87,10 +87,6 @@ class UsersController {
           return res.status(400).json({message: 'Preencha o e-mail nome para continuar'})
         }
 
-        if(!username) {
-          return res.status(400).json({message: 'Preencha o campo username para continuar'})
-        }
-
         const user = await UserModel.findOne({ username: username });
 
         if(user) {

@@ -18,7 +18,7 @@ export default function Username({ user, username }) {
 
     window.navigator.clipboard
     .writeText(linkToCopy)
-    .then(toast.success('Destino copiado para a área de transferência!'))
+    .then(toast.success('Copiado para a área de transferência!'))
   }
 
   return (

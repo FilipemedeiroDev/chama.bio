@@ -1,5 +1,5 @@
 import styles from './NewLink.module.css';
-import { useState  } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useGlobalContext from '../../Hooks/useGlobalContext';
 

@@ -1,5 +1,6 @@
 import styles from './Profile.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import useGlobalContext from '../../Hooks/useGlobalContext';
 
@@ -17,7 +18,7 @@ import api from '../../services/api';
 import { MdEdit as IconEdit } from 'react-icons/md';
 
 export default function Profile() {
-    const { profile, addAvatarUrl, user, setIsLoading } = useGlobalContext(); 
+    const { profile, user, addAvatarUrl, setIsLoading  } = useGlobalContext(); 
     const [formUSer, setFormUser] = useState({
       username: user.username,
       name: user.name,
@@ -70,11 +71,7 @@ export default function Profile() {
         if(!formUSer.email) {
           formUSer.email = user.email
         }
-
-         if(!formUSer.username) {
-          formUSer.username = user.username
-        }
-        
+   
         if(formProfile.profile_title === profile.profile_title) {
           formProfile.profile_title = profile.profile_title
         }
@@ -102,7 +99,13 @@ export default function Profile() {
               email: formUSer.email.trim(),
               username: formUSer.username.trim()
             })  
-            setFormUser({...prev => userUpdated})     
+            setFormUser({...prev => userUpdated})  
+          } else {
+            const { data: userUpdated } = await api.put('/users/edit', {
+              name: formUSer.name.trim(),
+              email: formUSer.email.trim()
+            })  
+            setFormUser({...prev => userUpdated}) 
           }
         } catch (error) {
           setIsLoading(false);
@@ -275,7 +278,6 @@ export default function Profile() {
 export async function getServerSideProps(ctx) {
   const { cookies } = ctx.req
   
-
   if(!cookies.token) {
       return {
         redirect: {
@@ -284,7 +286,7 @@ export async function getServerSideProps(ctx) {
         }
       }
     }
-      
-    return { props: { } }
+ 
+      return { props: {} } 
 }
 

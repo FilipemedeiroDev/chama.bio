@@ -10,18 +10,18 @@ import ContentLink from '../components/ContentLink';
 import Link from 'next/link';
 
 export default function Home({ username, cookieName}) {
-  const { links, getLinks, getUser, getProfile} =  useGlobalContext()
+  const { links, getLinks, getUser, getProfile } =  useGlobalContext()
 
   let name = cookieName
   name = String(name).split(' ');
   const firstName = name[0];
 
   function copyLink() {
-    const linkToCopy = `${window.location.href}/${username}`
+    const linkToCopy = `${window.location.href}${username}`
 
     window.navigator.clipboard
     .writeText(linkToCopy)
-    .then(toast.success('Destino copiado para a área de transferência!'))
+    .then(toast.success('Copiado para a área de transferência!'))
   }
 
 

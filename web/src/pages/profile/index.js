@@ -1,6 +1,6 @@
 import styles from './Profile.module.css';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
+
 import { toast } from 'react-toastify';
 import useGlobalContext from '../../Hooks/useGlobalContext';
 
@@ -64,34 +64,6 @@ export default function Profile() {
         e.preventDefault();
         setIsLoading(true);
 
-        if(!formUSer.name) {
-          formUSer.name = user.name
-        }
-
-        if(!formUSer.email) {
-          formUSer.email = user.email
-        }
-   
-        if(formProfile.profile_title === profile.profile_title) {
-          formProfile.profile_title = profile.profile_title
-        }
-        
-        if(!formProfile.description) {
-          formProfile.description = profile.description
-        }
-
-        if(!formProfile.background_color) {
-          formProfile.background_color = profile.background_color
-        }
-       
-        if(!formProfile.background_button_color) {   
-          formProfile.background_button_color = profile.background_button_color
-        }
-       
-        if(!formProfile.text_color) {
-          formProfile.text_color = profile.text_color
-        }
-     
         try {
           if(formUSer.username !== user.username) {
             const { data: userUpdated } = await api.put('/users/edit', {
